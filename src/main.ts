@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import './style.css'
 import { setupRouter } from 'Plugins/router'
+import { setupStore } from 'Store/index'
 import App from './App.vue'
 import 'vue-global-api'
 
@@ -11,6 +12,8 @@ import 'vue-global-api'
 const app = createApp(App)
 
 async function setupApp() {
+  // 挂载pinia状态管理
+  setupStore(app)
   // 挂载路由
   await setupRouter(app)
 

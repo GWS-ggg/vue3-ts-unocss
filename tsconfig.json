@@ -36,7 +36,7 @@
         "src/plugins/*"
       ],
       "Store/*": [
-        "src/stores/*"
+        "src/store/*"
       ],
       "Api/*": [
         "src/api/*"
