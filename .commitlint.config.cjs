@@ -29,5 +29,6 @@ module.exports = {
     'header-max-length': [2, 'always', 72], // header最长72
     'body-leading-blank': [0], // body换行
     'footer-leading-blank': [0, 'always'], // footer以空行开头
+    'body-empty': [1, 'always'], // 允许主体为空，设置为 1 表示警告
   },
 }
