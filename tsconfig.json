@@ -22,6 +22,21 @@
       ],
       "Utils/*": [
         "src/utils/*"
+      ],
+      "Views/*": [
+        "src/views/*"
+      ],
+      "Config/*": [
+        "src/config/*"
+      ],
+      "Routes/*": [
+        "src/routes/*"
+      ],
+      "Plugins/*": [
+        "src/plugins/*"
+      ],
+      "Store/*": [
+        "src/stores/*"
       ]
     }, // 跳过对 .d.ts 文件的类型检查
     "resolveJsonModule": true, // 配合esModuleInterop使用
