@@ -5,7 +5,8 @@
   // Auto fix
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "never"
+    "source.organizeImports": "never",
+    "source.fixAll.stylelint": "explicit"
   },
   // Silent the stylistic rules in you IDE, but still auto fix them
   "eslint.rules.customizations": [
@@ -85,5 +86,12 @@
     "postcss"
   ],
   "files.insertFinalNewline": true,
-  "files.autoSave": "afterDelay"
+  "files.autoSave": "afterDelay",
+  // 保存的时候自动格式化Style
+  "stylelint.validate": [
+    "css",
+    "less",
+    "vue",
+    "html"
+  ]
 }
