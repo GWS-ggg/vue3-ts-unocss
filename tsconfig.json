@@ -37,6 +37,9 @@
       ],
       "Store/*": [
         "src/stores/*"
+      ],
+      "Api/*": [
+        "src/api/*"
       ]
     }, // 跳过对 .d.ts 文件的类型检查
     "resolveJsonModule": true, // 配合esModuleInterop使用
