@@ -1,10 +1,12 @@
-import type { AxiosRequestConfig, AxiosResponse } from 'axios'
+import type { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 
-export function requestSuccessFunc(requestObj: AxiosRequestConfig) {
+// 在 Axios 的最新版本中，InternalAxiosRequestConfig 是一个更具体的类型，它包含了更多的内部属性。而 AxiosRequestConfig 是一个更通用的类型，可能不包含所有 InternalAxiosRequestConfig 所需的属性。 暂时使用类型断言
+
+export function requestSuccessFunc(requestObj: AxiosRequestConfig): InternalAxiosRequestConfig {
   // 自定义请求拦截逻辑，可以处理权限，请求发送监控等
   // ...
 
-  return requestObj
+  return requestObj as InternalAxiosRequestConfig
 }
 
 export function requestFailFunc(requestError: AxiosRequestConfig) {
