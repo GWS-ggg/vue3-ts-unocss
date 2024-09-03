@@ -30,7 +30,7 @@ export default defineConfig({
       'Config': path.resolve(__dirname, 'src/config'),
       'Plugins': path.resolve(__dirname, 'src/plugins'),
       'Store': path.resolve(__dirname, 'src/store'),
-      'Api': path.resolve(__dirname, 'src/api'),
+      'Api': path.resolve(__dirname, 'src/api')
     },
   },
   server: {
