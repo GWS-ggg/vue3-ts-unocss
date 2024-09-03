@@ -1,3 +1,4 @@
+import 'virtual:uno.css'
 import { createApp } from 'vue'
 import { setupRouter } from 'Plugins/router'
 import { setupStore } from 'Store/index'
@@ -5,8 +6,7 @@ import App from './App.vue'
 import 'vue-global-api'
 
 // createApp(App)
-//   .use(router)
-//   .mount('#app');
+//   .mount('#app')
 
 const app = createApp(App)
 

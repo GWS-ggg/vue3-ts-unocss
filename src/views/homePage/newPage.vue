@@ -30,4 +30,12 @@ userStore.authLogin().then((res) => {
 
 <template>
   <div>HomePage</div>
+  <div class="h-full text-center flex select-none all:transition-400">
+    <p text-16 px-10 shadow="[0_0_10px_4px_#dedede]">
+      iceCode
+    </p>
+  </div>
+  <div class=" border bg-red">
+    border
+  </div>
 </template>

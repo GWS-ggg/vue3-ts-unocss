@@ -1,14 +1,14 @@
 import * as path from 'node:path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-// Ant Design Vue 4.x 自动按需引入组件
 import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
-
+import UnoCSS from 'unocss/vite'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
+    UnoCSS(),
     Components({
       resolvers: [
         // Ant Design Vue 4.x 自动按需引入组件
