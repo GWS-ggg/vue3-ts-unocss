@@ -72,5 +72,6 @@
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "editor.formatOnSave": true
   },
-  "i18n-ally.sourceLanguage": "zh-cn" // 翻译源语言
+  "i18n-ally.sourceLanguage": "zh-cn", // 翻译源语言
+  "unocss.sort": true
 }

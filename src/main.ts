@@ -5,6 +5,9 @@ import { setupStore } from 'Store/index'
 import { setupI18n } from './language/i18n'
 import App from './App.vue'
 import 'vue-global-api'
+
+import './reset.css'
+
 // createApp(App)
 //   .mount('#app')
 
