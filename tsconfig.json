@@ -61,6 +61,7 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "src/libs/index.js"
   ] // 为文件进行不同配置
 }

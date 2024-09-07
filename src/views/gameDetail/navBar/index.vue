@@ -1,10 +1,12 @@
 <script lang="ts" setup></script>
 
 <template>
-  <nav class="fixed left-0 top-0 z-10 flex h-44 w-full items-center justify-between bg-white p-4 shadow-md">
+  <nav class="fixed left-0 top-0 z-10 h-44 w-full flex items-center justify-between bg-white p-4 shadow-md">
     <div class="flex items-center">
-      <img src="@/assets/images/logo.png" alt="Logo" class="h-30 w-30 mr-8" />
-      <h1 class="text-16 font-bold">99支付中心</h1>
+      <img src="@/assets/images/logo.png" alt="Logo" class="mr-8 h-30 w-30">
+      <h1 class="text-16 font-bold">
+        99支付中心
+      </h1>
     </div>
     <div class="mr-8 flex items-center">
       <button class="mr-4 flex items-center rounded-full bg-gray-100 px-3 py-1 text-gray-700">

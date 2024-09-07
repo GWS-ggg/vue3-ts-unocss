@@ -11,9 +11,6 @@ importers:
       '@ant-design/icons-vue':
         specifier: ^7.0.1
         version: 7.0.1(vue@3.4.38(typescript@5.5.4))
-      '@types/vue':
-        specifier: ^2.0.0
-        version: 2.0.0(typescript@5.5.4)
       '@unocss/preset-rem-to-px':
         specifier: ^0.62.3
         version: 0.62.3
@@ -69,6 +66,9 @@ importers:
       '@types/node':
         specifier: ^22.5.2
         version: 22.5.2
+      '@types/vue':
+        specifier: ^2.0.0
+        version: 2.0.0(typescript@5.5.4)
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.3.0
         version: 8.3.0(@typescript-eslint/parser@8.3.0(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4))(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4)

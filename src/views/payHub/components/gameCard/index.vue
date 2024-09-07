@@ -1,30 +1,7 @@
-<template>
-  <div class="gameCard" :class="{ gameCardMobile: isMobile }" style="--flex-count: 4; --flex-gap: 20px; margin-inline-end: 0px">
-    <div class="h-100 rounded-t-16 overflow-hidden">
-      <img :src="image" alt="" class="h-120 filter-blur-8 w-[110%] translate-x-[-5%] translate-y-[-15px] transform object-cover" />
-    </div>
-    <div class="gameItemWrap" :class="{ gameItemWrapMobile: isMobile }">
-      <div class="-mt-35 text-center">
-        <img :src="image" alt="Game Image" class="rounded-16 w-70 h-70" :class="{ gameIconMobile: isMobile }" />
-        <div class="gameItemName" :class="{ gameItemNameMobile: isMobile }">{{ title }}</div>
-      </div>
-      <div class="flex flex-wrap" :class="{ btnWrapMobile: isMobile }">
-        <div
-          class="color-[#fff] text-14 leading-14 f-b rounded-20 relative h-40 w-full flex-1 cursor-pointer bg-red-500 px-10 py-0 text-center opacity-100"
-          :class="{ gameItemBtnMobile: isMobile }"
-          @click="navigateToDetail"
-        >
-          <span class="leading-14 text-14 w-full flex-1 text-center">立即进入</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
 import { defineProps } from 'vue'
 import { useRouter } from 'vue-router'
-import { isMobile } from '@/utils/flexible'
+import { isPCDevice } from '@/utils/flexible'
 // 定义 props
 const props = defineProps<{
   title: string
@@ -32,17 +9,45 @@ const props = defineProps<{
 }>()
 
 const router = useRouter()
-const navigateToDetail = () => {
+function navigateToDetail() {
   router.push(`/gameDetail/${props.title}`) // 使用 props.title 作为参数
 }
 </script>
+
+<template>
+  <div
+    class="relative mt-13 min-w-165 w-[calc((100%-10px)/2)] flex flex-col rounded-16 shadow-md lg:w-[calc((100%-48px)/4)] md:w-[calc((100%-24px)/3)]"
+    :class="{ gameCardMobile: isPCDevice }"
+  >
+    <div class="h-100 overflow-hidden rounded-t-16">
+      <img :src="image" alt="" class="h-120 w-[110%] translate-x-[-5%] translate-y-[-15px] transform object-cover filter-blur-8">
+    </div>
+    <div class="gameItemWrap" :class="{ gameItemWrapMobile: isPCDevice }">
+      <div class="text-center -mt-35">
+        <img :src="image" alt="Game Image" class="h-65 w-65 rounded-16" :class="{ gameIconMobile: isPCDevice }">
+        <div class="gameItemName" :class="{ gameItemNameMobile: isPCDevice }">
+          {{ title }}
+        </div>
+      </div>
+      <div class="flex flex-wrap" :class="{ btnWrapMobile: isPCDevice }">
+        <div
+          class="relative h-36 w-full f-b flex-1 cursor-pointer rounded-31 bg-red-500 px-10 py-0 text-center text-14 color-[#fff] leading-14 opacity-100"
+          :class="{ gameItemBtnMobile: isPCDevice }"
+          @click="navigateToDetail"
+        >
+          <span class="w-full flex-1 text-center text-14 leading-14">立即进入</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .gameCard {
   position: relative;
   display: flex;
-  margin-top: 30px;
-  width: calc((100% - var(--flex-gap) * (var(--flex-count) - 1)) / var(--flex-count));
+  margin-top: 13px;
+  min-width: 165px;
   border-radius: 16px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   -webkit-margin-end: var(--flex-gap);
@@ -50,7 +55,7 @@ const navigateToDetail = () => {
   flex-direction: column;
 }
 .gameCardMobile {
-  @apply mt-13;
+  @apply mt-20;
 }
 
 .game-card:hover {
@@ -74,8 +79,8 @@ const navigateToDetail = () => {
 }
 
 .gameIconMobile {
-  width: 65px;
-  height: 65px;
+  width: 70px;
+  height: 70px;
 }
 
 .gameItemName {
@@ -84,7 +89,7 @@ const navigateToDetail = () => {
   margin-bottom: 11px;
   width: 100%;
   height: 28px;
-  font-size: 20px;
+  font-size: 16px;
   text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -97,8 +102,8 @@ const navigateToDetail = () => {
 .gameItemNameMobile {
   margin-top: 8px;
   margin-bottom: 8px;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 22px;
+  line-height: 24px;
 }
 
 .btnWrapMobile {
@@ -106,9 +111,7 @@ const navigateToDetail = () => {
 }
 
 .gameItemBtnMobile {
-  height: 36px;
-  font-size: 14px;
-  line-height: 14px;
+  height: 40px;
   border-radius: 31px;
 }
 </style>
