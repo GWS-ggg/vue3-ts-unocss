@@ -1,6 +1,7 @@
 // uno.config.ts
-import { defineConfig, presetAttributify, presetUno, transformerDirectives } from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetUno, transformerDirectives } from 'unocss'
 import presetRemToPx from '@unocss/preset-rem-to-px'
+import UnocssIcons from '@unocss/preset-icons'
 
 export default defineConfig({
   presets: [
@@ -11,6 +12,17 @@ export default defineConfig({
     }),
     // 属性化预设
     presetAttributify(),
+    presetIcons({
+      // 图标默认样式
+      extraProperties: {
+        display: 'inline-block',
+        height: '1em',
+        width: '1em',
+      },
+      /* options */
+    }),
+    UnocssIcons(),
+
   ],
   shortcuts: {
     'f-b': 'flex justify-between items-center',

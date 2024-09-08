@@ -2,9 +2,9 @@ export default [
   {
     path: '/',
     name: 'Home',
-    redirect: '/payHub', // 在vite.config.ts和tsconfig.json配置好路径别名Views
+    redirect: '/gameHome', // 在vite.config.ts和tsconfig.json配置好路径别名Views
   },
-  { path: '/home', component: () => import('Views/gameHome/index.vue') },
+  { path: '/gameHome', component: () => import('Views/gameHome/index.vue') },
   {
     path: '/gameList',
     name: 'gameList',
@@ -26,5 +26,10 @@ export default [
     path: '/payHub',
     name: 'payHub',
     component: () => import('Views/payHub/index.vue'),
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: () => import('Views/test.vue'),
   },
 ]

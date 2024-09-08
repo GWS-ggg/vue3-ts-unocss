@@ -41,9 +41,6 @@ watchEffect(() => {
       </div>
     </div>
   </div>
-  <div h-100>
-    footer
-  </div>
 </template>
 
 <style scoped>

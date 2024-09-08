@@ -6,6 +6,8 @@ interface PayMethod {
   logo: string
 }
 
+const emit = defineEmits(['onCloseDialog'])
+
 const selectedMethod = ref<number | null>(null)
 
 const payMethods: PayMethod[] = [
@@ -26,10 +28,21 @@ const payMethods: PayMethod[] = [
 function selectMethod(id: number) {
   selectedMethod.value = id
 }
+
+function handleClose() {
+  emit('onCloseDialog')
+}
 </script>
 
 <template>
-  <div class="scrollWidthNone max-h-[90vh] overflow-x-hidden overflow-y-auto">
+  <div class="scrollWidthNone max-h-[90vh] overflow-x-hidden overflow-y-auto text-16">
+    <svg fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute right-15 top-13 z-10 h-24 w-24 cursor-pointer" @click="handleClose">
+      <circle opacity="0.08" cx="12" cy="12" r="12" fill="#333" />
+      <g stroke="#666" stroke-width="2" stroke-linecap="round"><path d="m8.691 15.531 7.071-7.07M8.691 8.469l7.071 7.07" /></g>
+    </svg>
+    <div class="relative h-45 w-full f-c bg-[#fff] px-15 text-18">
+      确认支付订单
+    </div>
     <div class="h-auto bg-[#fff] px-15 pb-15 pt-10">
       <div class="flex items-center">
         <div class="leftPanel mr-10 min-w-300 w-387">
@@ -89,8 +102,8 @@ function selectMethod(id: number) {
                 <span class="color-red-600 font-medium">$ 6.00</span>
               </div>
             </div>
-            <div>
-              <div class="f-s">
+            <div class="flex flex-col gap-12">
+              <div class="f-s text-16 leading-16">
                 <p>合计：</p>
                 <div class="text-18 color-red-6 font-bold">
                   ￥ 6.00

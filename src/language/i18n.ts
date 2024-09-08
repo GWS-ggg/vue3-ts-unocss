@@ -23,9 +23,9 @@ export function setupI18n(app: App) {
   app.use(i18n)
 }
 
-export function t(key: string) {
-  return i18n.global.t(key)
-}
+// export function t(key: string) {
+//   return i18n.global.t(key)
+// }
 
 // 用于设定在本地存储选择的语言类型
 export function setLocale(locale: LocaleKey) {

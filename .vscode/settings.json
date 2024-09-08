@@ -18,7 +18,7 @@
   },
   "[vue]": {
     "editor.formatOnSave": true, // 交给 eslint
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
   },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -52,7 +52,7 @@
     "editor.defaultFormatter": "stylelint.vscode-stylelint"
   },
   // Disable the default formatter, use eslint instead
-  "prettier.enable": true,
+  "prettier.enable": false,
   // Auto fix
   "files.insertFinalNewline": true,
   "files.autoSave": "afterDelay",
