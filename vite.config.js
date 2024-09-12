@@ -12,7 +12,13 @@ import Icons from 'unplugin-icons/vite'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: tag => tag.startsWith('swiper-'),
+        },
+      },
+    }),
     UnoCSS(),
     AutoImport({
       resolvers: [ElementPlusResolver(), IconsResolver({
