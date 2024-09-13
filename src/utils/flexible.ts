@@ -8,5 +8,16 @@
 
 export const isPCDevice = computed(() => {
   // 检查是否包含移动设备的标识
-  return !/android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent)
+  console.log(navigator.userAgent)
+  return /windows|macintosh|linux/i.test(navigator.userAgent)
 })
+
+// const isPCDevice = computed(() => {
+//   const userAgent = navigator.userAgent.toLowerCase();
+//   return /(windows|macintosh|linux)/.test(userAgent);
+// };
+
+// export const isPCDevice = computed(() => {
+//   // 检查是否包含移动设备的标识
+//   return !/android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent)
+// })

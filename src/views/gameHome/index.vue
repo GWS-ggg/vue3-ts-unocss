@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import type { Swiper as SwiperClass } from 'swiper/types'
 import { isPCDevice } from '@/utils/flexible'
-// 注册 Swiper Element
+
 interface GameBg {
   bgImageMobile: string
   bgImagePC: string
