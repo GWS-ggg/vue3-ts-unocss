@@ -10,7 +10,7 @@ const props = defineProps<{
 }>()
 const router = useRouter()
 function navigateToDetail() {
-  router.push(`/gameDetail/${props.title}`) // 使用 props.title 作为参数
+  router.push(`/payDetail/${props.title}`) // 使用 props.title 作为参数
 }
 </script>
 

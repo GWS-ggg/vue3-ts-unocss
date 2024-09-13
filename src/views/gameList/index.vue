@@ -16,14 +16,14 @@ const gameCardList = ref<GameCard[]>([
   { bgImage: '/src/assets/images/Lilith Games_files/column_home_01.jpg', title: '剑与远征：启程', description: '由你，唤醒魔法旷野', logoImage: '/src/assets/images/Lilith Games_files/logo_02.png', avaterImage: '/src/assets/images/Lilith Games_files/icon_03.png' },
   { bgImage: '/src/assets/images/Lilith Games_files/column_home_01.jpg', title: '剑与远征：启程', description: '由你，唤醒魔法旷野', logoImage: '/src/assets/images/Lilith Games_files/logo_02.png', avaterImage: '/src/assets/images/Lilith Games_files/icon_03.png' },
   { bgImage: '/src/assets/images/Lilith Games_files/column_home_01.jpg', title: '剑与远征：启程', description: '由你，唤醒魔法旷野', logoImage: '/src/assets/images/Lilith Games_files/logo_02.png', avaterImage: '/src/assets/images/Lilith Games_files/icon_03.png' },
-  { bgImage: '/src/assets/images/Lilith Games_files/column_home_01.jpg', title: '剑与远征：启程', description: '由你，唤醒魔法旷野', logoImage: '/src/assets/images/Lilith Games_files/logo_02.png', avaterImage: '/src/assets/images/Lilith Games_files/icon_03.png' },
+
 ])
 </script>
 
 <template>
   <div class="max h-full w-[100vw] bg-[#fff] pt-50" :class="{ 'pt-60': isPCDevice }">
     <HeaderContainer />
-    <div class="w-[100vw] text-center">
+    <div class="w-[100vw] text-center text-left">
       <div class="relative h-37.333vw w-[100vw] bg-[#10090d] px-22 pt-10.667vw text-align-left color-[#fff]" :class="{ gameBannerContainer: isPCDevice }">
         <div class="bannerImgTransfrom absolute left-[50%] top-0 z-0 h-full w-full op-[.48]" :class="{ 'w-[1920]!': isPCDevice }">
           <img v-if="!isPCDevice" src="@/assets/images/Lilith Games_files/m_3_banner.png" alt="" h-full w-full>
