@@ -2,12 +2,12 @@
 import { defineProps } from 'vue'
 import { useRouter } from 'vue-router'
 import { isPCDevice } from '@/utils/flexible'
+
 // 定义 props
 const props = defineProps<{
   title: string
   image: string
 }>()
-
 const router = useRouter()
 function navigateToDetail() {
   router.push(`/gameDetail/${props.title}`) // 使用 props.title 作为参数

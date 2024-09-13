@@ -2,7 +2,11 @@
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import type { Swiper as SwiperClass } from 'swiper/types'
+import { useRouter } from 'vue-router'
 import { isPCDevice } from '@/utils/flexible'
+import HeaderContainer from '@/components/header/index.vue'
+import FooterContainer from '@/components/footer/index.vue'
+import { t } from '@/language/i18n'
 
 interface GameBg {
   bgImageMobile: string
@@ -13,31 +17,13 @@ interface GameBg {
 
 }
 
-interface NavbarItem {
-  name: string
-  path: string
-}
-
 interface GameCard {
   bgImage: string
   title: string
   logoImage: string
   link: string
 }
-// 导航栏
-const navbarItems = ref<NavbarItem[]>([
-  { name: '首页', path: '/gameHome' },
-  { name: '游戏', path: '/gameList' },
-  { name: '支付中心', path: '/payhub' },
-])
-const activeNavbarItem = ref('首页')
-function setActiveNavbarItem(name: string) {
-  activeNavbarItem.value = name
-}
-const isMenuVisible = ref(false)
-function toggleMenu() {
-  isMenuVisible.value = !isMenuVisible.value
-}
+
 const games = ref<GameBg[]>([
   { bgImageMobile: '/src/assets/images/Lilith Games_files/AFK_banner_m.jpg', title: '剑与远征：启程', titleImage: '/src/assets/images/Lilith Games_files/AFK-logo-cn.png', description: '由你，唤醒魔法旷野', bgImagePC: '/src/assets/images/Lilith Games_files/AFK_banner.jpg' },
   { bgImageMobile: '/src/assets/images/Lilith Games_files/m_01.jpg', title: '众神派对', titleImage: '/src/assets/images/Lilith Games_files/logo_01.png', description: '电音幻想风都市神话RPG', bgImagePC: '/src/assets/images/Lilith Games_files/pc_01.jpg' },
@@ -53,19 +39,6 @@ const gameCardList = ref<GameCard[]>([
   { bgImage: '/src/assets/images/Lilith Games_files/column_home_01.jpg', title: '战火勋章', logoImage: '/src/assets/images/Lilith Games_files/icon_03.png', link: 'https://afkjourney.lilith.com/' },
   { bgImage: '/src/assets/images/Lilith Games_files/column_home_01.jpg', title: '战火勋章', logoImage: '/src/assets/images/Lilith Games_files/icon_03.png', link: 'https://afkjourney.lilith.com/' },
 ])
-
-const selectedLanguage = ref('zh-cn')
-
-const LanguageOptions = [
-  {
-    value: 'zh-cn',
-    label: '中文',
-  },
-  {
-    value: 'en',
-    label: '英文',
-  },
-]
 
 function testClick() {
   console.log('testclick')
@@ -98,62 +71,20 @@ function onSlideChange() {
     isLastSlide.value = swiperRef.value.isEnd
   }
 }
+
+// 路由跳转
+const router = useRouter()
+function navigatieToGameList() {
+  router.push('/gameList')
+  nextTick(() => {
+    window.scrollTo(0, 0) // 确保滚动到顶部
+  })
+}
 </script>
 
 <template>
-  <el-container>
-    <el-header
-      class="fixed left-0 top-0 z-1000 w-[100vw] bg-[#000000] text-center p-[0]!"
-      :height="isPCDevice ? '60px' : '50px'"
-    >
-      <div class="h-full flex items-center px-20" :class="{ 'px-40': isPCDevice }">
-        <div v-if="!isPCDevice" @click="toggleMenu">
-          <div v-if="!isMenuVisible" class="i-ooui:menu h-24 w-24" style="color: white;" />
-          <div v-else class="i-material-symbols:close h-24 w-24" style="color: white;" />
-        </div>
-        <div class="h-30 w-full cursor-pointer" :class="{ 'h-34  w-[120px]!': isPCDevice }">
-          <img
-            class="h-full" src="https://lilithimage.lilithcdn.com/official-web-lilith/lilith-logo_cn%403x.png"
-            alt=""
-          >
-        </div>
-        <div v-if="isPCDevice" class="w-full f-c color-[#fff]">
-          <router-link
-            v-for="navbaritem in navbarItems" :key="navbaritem.name" :to="navbaritem.path"
-            class="mx-[1vw] text-19 text-color-[#fff] leading-20 no-underline"
-            :class="{ 'text-red-500 font-bold': activeNavbarItem === navbaritem.name }"
-            @click="setActiveNavbarItem(navbaritem.name)"
-          >
-            {{ navbaritem.name }}
-          </router-link>
-        </div>
-        <div class="color-[#fff]">
-          <el-select
-            v-model="selectedLanguage" placeholder="Select" style="width: 80px" class="custom-select"
-            :teleported="false"
-          >
-            <el-option
-              v-for="item in LanguageOptions" :key="item.value" :label="item.label" :value="item.value"
-              class="custonm-option"
-            />
-          </el-select>
-        </div>
-      </div>
-    </el-header>
-    <div v-show="isMenuVisible" class="absolute left-0 top-50 z-1000 h-[100%] w-[70vh] bg-black color-[#fff]">
-      <div class="px-20">
-        <router-link
-          v-for="navbaritem in navbarItems" :key="navbaritem.name" :to="navbaritem.path"
-          class="b-b-1 b-b-[hsla(0,0%,100%,.15)] b-b-solid text-color-[#fff] no-underline"
-          :class="{ 'text-red-500 font-bold': activeNavbarItem === navbaritem.name }"
-          @click="setActiveNavbarItem(navbaritem.name)"
-        >
-          <div class="py-20 text-16">
-            {{ navbaritem.name }}
-          </div>
-        </router-link>
-      </div>
-    </div>
+  <el-container class="w-full">
+    <HeaderContainer />
     <el-main class="w-full p-[0]!">
       <div class="bannerContainer bg-[#000] color-[#fff]">
         <el-carousel trigger="click" height="auto" arrow="always" indicator-position="none">
@@ -209,18 +140,18 @@ function onSlideChange() {
       >
         <div class="gameTitle mb-15 f-s pl-20" :class="{ ' w-full max-w-1560 pl-[0]! ': isPCDevice }">
           <div class="text-22" :class="{ 'text-30': isPCDevice }">
-            <span class="color-[#333]">游戏</span>
+            <span class="color-[#333]">{{ t('message.game') }}</span>
           </div>
-          <div v-if="isPCDevice" class="ml-12 f-c cursor-pointer text-18 color-[#d32f2f]">
+          <div v-if="isPCDevice" class="ml-12 f-c cursor-pointer text-18 color-[#d32f2f]" @click="navigatieToGameList">
             <span>查看所有游戏</span>
             <div class="i-iconamoon:arrow-right-2 ml-4 h-20 w-20" style="color: #e21818;" />
           </div>
-          <div v-if="!isPCDevice" class="i-iconamoon:arrow-right-2 ml-16 h-20 w-20" style="color: #e21818;" />
+          <div v-if="!isPCDevice" class="i-iconamoon:arrow-right-2 ml-16 h-20 w-20" style="color: #e21818;" @click="navigatieToGameList" />
           <!-- 跳转到游戏列表 -->
         </div>
         <div
           v-if="!isPCDevice"
-          class="mobileGameList w-full overflow-x-auto overflow-y-hidden whitespace-nowrap pb-30 text-left"
+          class="scrollbar-hidden mobileGameList w-full overflow-x-auto overflow-y-hidden whitespace-nowrap pb-30 text-left"
         >
           <a
             v-for="gameCardItem in gameCardList" :key="gameCardItem.title" :href="gameCardItem.link"
@@ -243,7 +174,7 @@ function onSlideChange() {
           </a>
         </div>
         <div v-if="isPCDevice" class="relative">
-          <div class="relative w-full">
+          <div class="relative mb-100 w-full">
             <Swiper :slides-per-view="4" :space-between="20" @swiper="onSwiper" @slide-change="onSlideChange">
               <SwiperSlide v-for="(slide, index) in gameCardList" :key="index">
                 <a href="#" class="gameCardParentHover relative w-full pb-48">
@@ -284,8 +215,8 @@ function onSlideChange() {
         </div>
       </div>
     </el-main>
-    <el-footer>Footer</el-footer>
   </el-container>
+  <FooterContainer />
 </template>
 
 <style lang="less" scoped>
@@ -295,79 +226,6 @@ function onSlideChange() {
 
 .el-menu--horizontal {
   --el-menu-horizontal-height: 50px;
-}
-
-.custom-select {
-
-  position: relative;
-
-  :deep(.el-select__placeholder) {
-    color: #fff
-  }
-
-  :deep(.el-select__wrapper) {
-    background-color: #000000;
-    box-shadow: none;
-  }
-
-  :deep(.el-select__caret) {
-    color: #ffffff;
-    /* 修改下拉标签颜色 */
-  }
-
-  /* 去掉边框 */
-  :deep(.el-select__wrapper.is-hovering:not(.is-focused)) {
-    box-shadow: none;
-  }
-
-  :deep(.el-select-dropdown__item.is-selected) {
-    color: #000;
-    background-color: #e6f7ff
-  }
-
-}
-
-:deep(.el-select__popper.el-popper) {
-  border: none;
-  box-shadow: none
-}
-
-:deep(.el-select-dropdown) {
-  position: absolute;
-  /* 设置下拉框为绝对定位 */
-  top: -5px;
-  /* 删除空隙*/
-  z-index: 1000;
-  /* 确保下拉框在其他元素之上 */
-  background: #fff;
-}
-
-:deep(.el-popper__arrow) {
-  display: none;
-  /* 隐藏小三角图标 */
-}
-
-:deep(.el-carousel__arrow) {
-  width: 20px;
-  /* 宽度 */
-  height: 60px;
-  /* 高度 */
-  color: #d32f2f;
-  /* 箭头颜色 */
-  background-color: rgba(0, 0, 0, .3);
-  /* 箭头背景色 */
-  border-radius: 0px
-}
-
-// 切换箭头大小修改
-:deep(.el-icon) {
-  width: 20px;
-  height: 20px;
-}
-
-:deep(.el-icon svg) {
-  width: 20px;
-  height: 20px;
 }
 
 :deep(.el-carousel__arrow--right) {
@@ -418,9 +276,5 @@ function onSlideChange() {
   opacity: 1;
   -webkit-transition: all .5s;
   transition: all .5s;
-}
-
-.swiperArrowShadow {
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .15)
 }
 </style>

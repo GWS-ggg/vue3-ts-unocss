@@ -4,6 +4,8 @@ import type { LocaleMessages } from 'vue-i18n'
 const locale: LocaleMessages<any> = {
   message: {
     pageTitle: '中文标题',
+    game: '游戏',
+    home: '首页',
   },
 }
 

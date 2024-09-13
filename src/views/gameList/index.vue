@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import HeaderContainer from '@/components/header/index.vue'
+import FooterContainer from '@/components/footer/index.vue'
 import { isPCDevice } from '@/utils/flexible'
 
 interface GameCard {
@@ -9,7 +10,6 @@ interface GameCard {
   logoImage: string
   avaterImage: string
 }
-
 const gameCardList = ref<GameCard[]>([
   { bgImage: '/src/assets/images/Lilith Games_files/AFK-bg.jpg', title: '剑与远征：启程', description: '由你，唤醒魔法旷野', logoImage: '/src/assets/images/Lilith Games_files/AFK-logo-cn.png', avaterImage: '/src/assets/images/Lilith Games_files/AFK-avater-cn.png' },
   { bgImage: '/src/assets/images/Lilith Games_files/xgame_01.jpg', title: '众神派对', description: '电音幻想风都市神话RPG', logoImage: '/src/assets/images/Lilith Games_files/logo_01.png', avaterImage: '/src/assets/images/Lilith Games_files/icon_02.jpg' },
@@ -52,7 +52,7 @@ const gameCardList = ref<GameCard[]>([
             <div class="pr-10 color-[#666]" :class="{ 'text-14 leading-17': isPCDevice, 'leading-15 text-11': !isPCDevice }">
               {{ gameCard.description }}
             </div>
-            <div class="gameCardExplore">
+            <div v-if="isPCDevice" class="gameCardExplore">
               探索
             </div>
           </div>
@@ -62,6 +62,7 @@ const gameCardList = ref<GameCard[]>([
         </div>
       </div>
     </div>
+    <FooterContainer />
   </div>
 </template>
 

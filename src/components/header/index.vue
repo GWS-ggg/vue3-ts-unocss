@@ -1,17 +1,19 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
 import { isPCDevice } from '@/utils/flexible'
+import { type LocaleKey, setLocale, t } from '@/language/i18n'
 
 interface NavbarItem {
   name: string
   path: string
 }
 // 导航栏
-const navbarItems = ref<NavbarItem[]>([
-  { name: '首页', path: '/gameHome' },
-  { name: '游戏', path: '/gameList' },
+const navbarItems = computed<NavbarItem[]>(() => [
+  { name: t('message.home'), path: '/gameHome' },
+  { name: t('message.game'), path: '/gameList' },
   { name: '支付中心', path: '/payhub' },
 ])
-const activeNavbarItem = ref('首页')
+const activeNavbarItem = ref('')
 function setActiveNavbarItem(name: string) {
   activeNavbarItem.value = name
 }
@@ -19,9 +21,28 @@ const isMenuVisible = ref(false)
 function toggleMenu() {
   isMenuVisible.value = !isMenuVisible.value
 }
+function closeMenu() {
+  isMenuVisible.value = false
+}
+function initializeNavbarItem() {
+  const currentRoute = useRoute().name // 获取当前路由名称
+  if (currentRoute === 'gameHome') {
+    activeNavbarItem.value = '首页'
+  }
+  else if (currentRoute === 'gameList') {
+    activeNavbarItem.value = '游戏'
+  }
+}
 
-const selectedLanguage = ref('zh-cn')
+initializeNavbarItem()
+const selectedLanguage = ref('zh-cn') // 默认值
 
+onMounted(() => {
+  const storedLanguage = localStorage.getItem('lang')
+  if (storedLanguage) {
+    selectedLanguage.value = storedLanguage // 从 LocalStorage 获取值
+  }
+})
 const LanguageOptions = [
   {
     value: 'zh-cn',
@@ -32,6 +53,21 @@ const LanguageOptions = [
     label: '英文',
   },
 ]
+
+const localeKeys: LocaleKey[] = ['zh-cn', 'en', 'ja'] // 假设的有效语言数组
+
+function changeLanguage(language: string) {
+  if (isLocaleKey(language)) {
+    setLocale(language) // 直接传入，因为已经验证过
+  }
+  else {
+    console.error('不支持的语言')
+  }
+}
+
+function isLocaleKey(language: string): language is LocaleKey {
+  return localeKeys.includes(language as LocaleKey)
+}
 </script>
 
 <template>
@@ -67,13 +103,14 @@ const LanguageOptions = [
         >
           <el-option
             v-for="item in LanguageOptions" :key="item.value" :label="item.label" :value="item.value"
-            class="custonm-option"
+            @click="changeLanguage(item.value)"
           />
         </el-select>
       </div>
     </div>
   </el-header>
-  <div v-show="isMenuVisible" class="absolute left-0 top-50 z-1000 h-[100%] w-[70vh] bg-black color-[#fff]">
+  <div v-show="isMenuVisible" class="fixed bottom-0 left-0 right-0 top-0 z-10" @click="closeMenu" />
+  <div v-show="isMenuVisible" class="fixed left-0 top-50 z-1000 h-[100%] w-[70vw] bg-black color-[#fff]">
     <div class="px-20">
       <router-link
         v-for="navbaritem in navbarItems" :key="navbaritem.name" :to="navbaritem.path"
