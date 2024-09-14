@@ -49,7 +49,6 @@ const swiperRef = ref<SwiperClass | null>(null)
 const isFirstSlide = ref(true)
 const isLastSlide = ref(false)
 function onSwiper(swiper: SwiperClass) {
-  console.log('11')
   swiperRef.value = swiper
 }
 
@@ -65,7 +64,6 @@ function goToPrevSlide() {
 }
 
 function onSlideChange() {
-  console.log('333')
   if (swiperRef.value) {
     isFirstSlide.value = swiperRef.value.isBeginning
     isLastSlide.value = swiperRef.value.isEnd
@@ -74,16 +72,23 @@ function onSlideChange() {
 
 // 路由跳转
 const router = useRouter()
+
+//  跳转到游戏列表
 function navigatieToGameList() {
   router.push('/gameList')
   nextTick(() => {
     window.scrollTo(0, 0) // 确保滚动到顶部
   })
 }
+
+// 跳转到游戏详情页面
+function navigatieToGameDetail() {
+  router.push('/gameDetail')
+}
 </script>
 
 <template>
-  <el-container class="w-full">
+  <el-container>
     <HeaderContainer />
     <el-main class="w-full p-[0]!">
       <div class="bannerContainer bg-[#000] color-[#fff]">
@@ -92,7 +97,7 @@ function navigatieToGameList() {
             v-for="item in games" :key="item" class="relative w-[100vw] cursor-pointer"
             :style="{ height: isPCDevice ? '540px' : '106.67vw' } "
           >
-            <div :class="{ 'absolute left-0 top-0': isPCDevice }">
+            <div :class="{ 'absolute left-0 top-0 w-full': isPCDevice }">
               <img
                 :src="isPCDevice ? item.bgImagePC : item.bgImageMobile" alt=""
                 class="h-61.33vw w-full object-contain" :class="{ 'h-auto': isPCDevice }"
@@ -153,16 +158,17 @@ function navigatieToGameList() {
           v-if="!isPCDevice"
           class="scrollbar-hidden mobileGameList w-full overflow-x-auto overflow-y-hidden whitespace-nowrap pb-30 text-left"
         >
-          <a
-            v-for="gameCardItem in gameCardList" :key="gameCardItem.title" :href="gameCardItem.link"
-            class="relative ml-20 inline-block h-full w-47.2vw"
+          <div
+            v-for="gameCardItem in gameCardList" :key="gameCardItem.title" class="relative ml-20 inline-block h-full w-47.2vw cursor-pointer"
+            @click="navigatieToGameDetail"
           >
             <div class="relative h-66.133vw w-full">
               <img :src="gameCardItem.bgImage" class="h-full w-full" alt="">
               <div
                 class="mobileGameCardDesc absolute bottom-0 left-0 z-0 h-26.133vw w-full text-center text-16 color-[#fff] leading-26.133vw"
               >
-                {{ gameCardItem.title }}</div>
+                {{ gameCardItem.title }}
+              </div>
             </div>
             <div class="gameLogo relative mx-auto h-70 w-70 op-[.999] -mt-30">
               <img
@@ -171,13 +177,13 @@ function navigatieToGameList() {
               >
               <img :src="gameCardItem.logoImage" alt="" class="h-60 w-60 rounded-15 op-[.99999]">
             </div>
-          </a>
+          </div>
         </div>
         <div v-if="isPCDevice" class="relative">
           <div class="relative mb-100 w-full">
             <Swiper :slides-per-view="4" :space-between="20" @swiper="onSwiper" @slide-change="onSlideChange">
               <SwiperSlide v-for="(slide, index) in gameCardList" :key="index">
-                <a href="#" class="gameCardParentHover relative w-full pb-48">
+                <div class="gameCardParentHover relative w-full cursor-pointer pb-48" @click="navigatieToGameDetail">
                   <div class="relative h-454 overflow-hidden">
                     <img :src="slide.bgImage" :alt="slide.title" class="block w-full">
                     <div class="gameCardPCDesc absolute bottom-0 z-0 h-228 w-full f-e flex-col color-[#fff]">
@@ -196,7 +202,7 @@ function navigatieToGameList() {
                     >
                     <img :src="slide.logoImage" class="h-full w-full rounded-25 op-[.999]" alt="">
                   </div>
-                </a>
+                </div>
               </SwiperSlide>
             </Swiper>
             <div
@@ -220,6 +226,72 @@ function navigatieToGameList() {
 </template>
 
 <style lang="less" scoped>
+:deep(.el-select__placeholder) {
+  color: #fff
+}
+
+:deep(.el-select__wrapper) {
+  background-color: #000000;
+  box-shadow: none;
+}
+
+:deep(.el-select__caret) {
+  color: #ffffff;
+  /* 修改下拉标签颜色 */
+}
+
+/* 去掉边框 */
+:deep(.el-select__wrapper.is-hovering:not(.is-focused)) {
+  box-shadow: none;
+}
+
+:deep(.el-select-dropdown__item.is-selected) {
+  color: #000;
+  background-color: #e6f7ff
+}
+
+:deep(.el-select__popper.el-popper) {
+border: none;
+box-shadow: none
+}
+
+:deep(.el-select-dropdown) {
+position: absolute;
+/* 设置下拉框为绝对定位 */
+top: -5px;
+/* 删除空隙*/
+z-index: 1000;
+/* 确保下拉框在其他元素之上 */
+background: #fff;
+}
+
+:deep(.el-popper__arrow) {
+display: none;
+/* 隐藏小三角图标 */
+}
+
+:deep(.el-carousel__arrow) {
+width: 20px;
+/* 宽度 */
+height: 60px;
+/* 高度 */
+color: #d32f2f;
+/* 箭头颜色 */
+background-color: rgba(0, 0, 0, .3);
+/* 箭头背景色 */
+border-radius: 0px
+}
+
+// 切换箭头大小修改
+:deep(.el-icon) {
+width: 20px;
+height: 20px;
+}
+
+:deep(.el-icon svg) {
+width: 20px;
+height: 20px;
+}
 .el-menu--horizontal.el-menu {
   border-bottom: none;
 }

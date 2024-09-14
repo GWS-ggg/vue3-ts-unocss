@@ -30,5 +30,8 @@ export async function setupRouter(app: App) {
   // 路由准备就绪后挂载APP实例
   await router.isReady()
 }
-
+router.beforeEach((to, from, next) => {
+  window.scrollTo(0, 0)
+  next()
+})
 export default router

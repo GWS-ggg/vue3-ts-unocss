@@ -1,5 +1,6 @@
 // uno.config.ts
 import { defineConfig, presetAttributify, presetIcons, presetUno, transformerDirectives } from 'unocss'
+import type { RemToPxOptions } from '@unocss/preset-rem-to-px'
 import presetRemToPx from '@unocss/preset-rem-to-px'
 import UnocssIcons from '@unocss/preset-icons'
 
@@ -35,4 +36,17 @@ export default defineConfig({
   },
   rules: [],
   transformers: [transformerDirectives()],
+  // postprocess: (util) => {
+  //   if (typeof document !== 'undefined') {
+  //     const html = document.documentElement
+  //     const baseSize = Number.parseFloat(getComputedStyle(html).fontSize) // 获取动态调整的基准值
+  //     util.entries.forEach(([prop, value]) => {
+  //       if (prop === 'font-size' && typeof value === 'string' && value.endsWith('rem')) {
+  //         const remValue = Number.parseFloat(value)
+  //         const pxValue = remValue * baseSize
+  //         util.entries[prop] = `${pxValue}px`
+  //       }
+  //     })
+  //   }
+  // },
 })

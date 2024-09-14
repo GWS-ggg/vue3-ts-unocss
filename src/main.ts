@@ -7,6 +7,7 @@ import App from './App.vue'
 import 'vue-global-api'
 import './reset.css'
 import libs from '@/libs/index'
+// import 'amfe-flexible'
 // createApp(App)
 //   .mount('#app')
 

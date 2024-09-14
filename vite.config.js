@@ -7,6 +7,8 @@ import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
+import postCssPxToRem from 'postcss-pxtorem'
+// import pxtorom from '@minko-fe/postcss-pxtorem'
 // Icons 自动按需引入图标库
 
 // https://vitejs.dev/config/
@@ -82,5 +84,26 @@ export default defineConfig({
       'console', // 如果线上需要打印，就把这行注释掉
       'debugger',
     ],
+  },
+  css: {
+    postcss: {
+      plugins: [
+        postCssPxToRem({
+          // 自适应，px>rem转换
+          rootValue: 16, // 这里代表的是1rem等于多少rootValue的px。75表示750设计稿，37.5表示375设计稿
+          propList: ['*'], // 需要转换的属性，这里选择全部都进行转换
+          selectorBlackList: ['norem', 'ignore'], // 过滤掉norem-开头的class，不进行rem转换
+          mediaQuery: false, // 允许在媒体查询中转换 px
+          exclude: (e) => { // 只对src/views/gameDetail文件进行px转rem，其他文件不转换
+            if (/src(\\|\/)views(\\|\/)gameDetail/.test(e)) {
+              return false
+            }
+            else {
+              return true
+            }
+          },
+        }),
+      ],
+    },
   },
 })

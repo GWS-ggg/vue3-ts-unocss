@@ -8,10 +8,11 @@ interface NavbarItem {
   path: string
 }
 // 导航栏
-const navbarItems = computed<NavbarItem[]>(() => [
-  { name: t('message.home'), path: '/gameHome' },
-  { name: t('message.game'), path: '/gameList' },
-  { name: '支付中心', path: '/payhub' },
+
+const navbarItems = ref<NavbarItem[]>([
+  { name: 'message.home', path: '/gameHome' },
+  { name: 'message.game', path: '/gameList' },
+  { name: 'message.payhub', path: '/payhub' },
 ])
 const activeNavbarItem = ref('')
 function setActiveNavbarItem(name: string) {
@@ -27,10 +28,10 @@ function closeMenu() {
 function initializeNavbarItem() {
   const currentRoute = useRoute().name // 获取当前路由名称
   if (currentRoute === 'gameHome') {
-    activeNavbarItem.value = '首页'
+    activeNavbarItem.value = 'message.home'
   }
   else if (currentRoute === 'gameList') {
-    activeNavbarItem.value = '游戏'
+    activeNavbarItem.value = 'message.game'
   }
 }
 
@@ -42,6 +43,11 @@ onMounted(() => {
   if (storedLanguage) {
     selectedLanguage.value = storedLanguage // 从 LocalStorage 获取值
   }
+})
+
+// 路由跳转后 定位到顶部
+onMounted(() => {
+  window.scrollTo(0, 0)
 })
 const LanguageOptions = [
   {
@@ -80,9 +86,9 @@ function isLocaleKey(language: string): language is LocaleKey {
         <div v-if="!isMenuVisible" class="i-ooui:menu h-24 w-24" style="color: white;" />
         <div v-else class="i-material-symbols:close h-24 w-24" style="color: white;" />
       </div>
-      <div class="h-30 w-full cursor-pointer" :class="{ 'h-34  w-[120px]!': isPCDevice }">
+      <div class="h-30 w-full f-c cursor-pointer" :class="{ 'h-34  w-[120px]!': isPCDevice }">
         <img
-          class="h-full" src="https://lilithimage.lilithcdn.com/official-web-lilith/lilith-logo_cn%403x.png"
+          class="block h-full" src="https://lilithimage.lilithcdn.com/official-web-lilith/lilith-logo_cn%403x.png"
           alt=""
         >
       </div>
@@ -93,7 +99,7 @@ function isLocaleKey(language: string): language is LocaleKey {
           :class="{ 'text-red-500 font-bold': activeNavbarItem === navbaritem.name }"
           @click="setActiveNavbarItem(navbaritem.name)"
         >
-          {{ navbaritem.name }}
+          {{ t(navbaritem.name) }}
         </router-link>
       </div>
       <div class="color-[#fff]">
@@ -119,7 +125,7 @@ function isLocaleKey(language: string): language is LocaleKey {
         @click="setActiveNavbarItem(navbaritem.name)"
       >
         <div class="py-20 text-16">
-          {{ navbaritem.name }}
+          {{ t(navbaritem.name) }}
         </div>
       </router-link>
     </div>
