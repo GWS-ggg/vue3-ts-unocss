@@ -35,11 +35,11 @@ const props = defineProps({
     type: Function,
   },
 })
-const emits = defineEmits(['update:modelValue'])
+defineEmits(['update:modelValue'])
 // const DURATION = '0.5s' // 关闭事件
-function onClose() {
-  emits('update:modelValue', false)
-}
+// function onClose() {
+//   emits('update:modelValue', false)
+// }
 // const loading = ref(false)
 // // 取消事件
 // function onCancel() {
@@ -93,7 +93,7 @@ watch(() => props.modelValue, (newValue) => {
   <div>
     <!-- 遮罩层 -->
     <transition name="fade">
-      <div v-if="modelValue" class="fixed left-0 top-0 z-50 h-screen w-full bg-zinc-900/80" @click="onClose" />
+      <div v-if="modelValue" class="fixed left-0 top-0 z-50 h-screen w-full bg-zinc-900/80" />
     </transition>
     <!-- 内容 -->
     <transition name="up">

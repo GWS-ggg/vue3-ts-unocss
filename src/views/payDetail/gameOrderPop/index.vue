@@ -26,6 +26,31 @@ const payMethods: PayMethod[] = [
     description: 'WeChat Pay',
     logo: '/src/assets/icons/wechat-pay-logo.png',
   },
+  {
+    id: 3,
+    name: '微信支付',
+    description: 'WeChat Pay',
+    logo: '/src/assets/icons/wechat-pay-logo.png',
+  },
+  {
+    id: 4,
+    name: '微信支付',
+    description: 'WeChat Pay',
+    logo: '/src/assets/icons/wechat-pay-logo.png',
+  },
+  {
+    id: 5,
+    name: '微信支付',
+    description: 'WeChat Pay',
+    logo: '/src/assets/icons/wechat-pay-logo.png',
+  },
+  {
+    id: 6,
+    name: '微信支付',
+    description: 'WeChat Pay',
+    logo: '/src/assets/icons/wechat-pay-logo.png',
+  },
+
 ]
 
 function selectMethod(id: number) {
@@ -34,7 +59,7 @@ function selectMethod(id: number) {
 </script>
 
 <template>
-  <div class="relative max-h-[80vh] overflow-hidden rounded-t-24 bg-[#f4f4f4]">
+  <div class="relative max-h-[90vh] overflow-hidden rounded-t-24 bg-[#f4f4f4]">
     <svg class="absolute left-15 top-13 z-10 h-24 w-24" fill="none" xmlns="http://www.w3.org/2000/svg" @click="handleClose">
       <circle opacity="0.08" cx="12" cy="12" r="12" fill="#333" />
       <g stroke="#666" stroke-width="2" stroke-linecap="round">

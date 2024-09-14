@@ -7,7 +7,7 @@ function handleClose() {
 </script>
 
 <template>
-  <div class="w-450 rounded-16 text-16">
+  <div class="min-w-350 rounded-16 text-16">
     <div class="h-45">
       <svg fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute right-15 top-13 z-10 h-24 w-24 cursor-pointer" @click="handleClose">
         <circle opacity="0.08" cx="12" cy="12" r="12" fill="#333" />
@@ -24,10 +24,10 @@ function handleClose() {
           请您输入角色UID
         </div>
         <div class="mb-20 f-c">
-          <input id="UIDinput" class="w-[80%] border border-[#ced4da] rounded-12 border-solid px-10 py-5 text-16" type="text" name="uid" title="只能输入数字!" placeholder="请您输入角色UID">
+          <input id="UIDinput" class="w-180 border border-[#ced4da] rounded-12 border-solid px-10 py-5 text-16" type="text" name="uid" title="只能输入数字!" placeholder="请您输入角色UID">
         </div>
         <div class="mt-20 w-full f-c">
-          <button type="submit" class="h-40 w-[90%] border-red rounded-12 border-solid border-solid bg-red">
+          <button type="submit" class="h-40 w-200 border-red rounded-12 border-solid border-solid bg-red">
             确认
           </button>
         </div>

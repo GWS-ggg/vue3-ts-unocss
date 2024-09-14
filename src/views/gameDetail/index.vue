@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import FooterContainer from '@/components/footer/index.vue'
 // 动态调整根元素的字体大小
 function setRemUnit() {
@@ -34,6 +35,12 @@ function handleLinkClick() {
 const languageVisible = ref(false)
 function handlelanguageClick() {
   languageVisible.value = !languageVisible.value
+}
+
+// 路由跳转
+const router = useRouter()
+function navigationToPayHub() {
+  router.push('/payDetail/xxx')
 }
 </script>
 
@@ -94,9 +101,9 @@ function handlelanguageClick() {
                 </li>
               </ul>
             </div>
-            <a
-              target="_blank" href="https://store.farlightgames.com/cod?shortlink=codg.int.web.os.ce.def"
-              class="kv_btn kv_purchase"
+            <div
+              target="_blank"
+              class="kv_btn kv_purchase cursor-pointer" @click="navigationToPayHub"
             />
             <div class="kv_btn">
               <span data-lilac="" data-lilac-key-="pro3">PLAY NOW!</span>
@@ -122,7 +129,7 @@ function handlelanguageClick() {
           <div class="kv_logo">
             <img block w-full src="@/assets/images/detail/kv_logo.png" alt="">
           </div>
-          <a href="#" class="kv_purchase kv_btn" />
+          <div class="kv_purchase kv_btn" @click="navigationToPayHub" />
           <div class="kv_btn m_kv_btn" :class="{ ' on ': linkVisible }" @click="handleLinkClick">
             <span>PLAY NOW!</span>
             <div class="kv_ul m_kv_ul">
@@ -255,7 +262,7 @@ function handlelanguageClick() {
               class="ttlink" target="_blank" href="https://www.tiktok.com/@callofdragonsgame"
               onclick="gtag('event', 'tiktok');"
             />
-            <a target="_blank" href="https://vk.com/callofdragons" onclick="gtag('event', 'vk');" />
+            <a target="_blank" href="https://vk.com/callofdragons" />
           </div>
           <i class="ani bottom_r fadeInRight" />
         </div>

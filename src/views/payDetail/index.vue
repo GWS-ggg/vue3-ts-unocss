@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import NavBar from './navBar/index.vue'
+import NavBar from '../payHub/components/navBar/index.vue'
 import OrderDialog from './gameOrder/index.vue'
 import OrderPop from './gameOrderPop/index.vue'
 import GameLogin from './gameLogin/index.vue'
