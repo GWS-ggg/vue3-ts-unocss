@@ -6,7 +6,7 @@ const locale: LocaleMessages<any> = {
     pageTitle: 'pageTitle',
     game: 'GAMES',
     home: 'HOME',
-    payhub: 'PAYHUB',
+    payHub: 'PAYHUB',
     gameDetail: 'GAMEDETAIL',
   },
 }

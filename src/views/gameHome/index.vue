@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/effect-coverflow'
+import { Autoplay, EffectCoverflow, Pagination, Scrollbar } from 'swiper/modules'
 import type { Swiper as SwiperClass } from 'swiper/types'
 import { useRouter } from 'vue-router'
 import { isPCDevice } from '@/utils/flexible'
@@ -44,7 +47,7 @@ function testClick() {
   console.log('testclick')
 }
 
-// swiper
+// swiper for gameList
 const swiperRef = ref<SwiperClass | null>(null)
 const isFirstSlide = ref(true)
 const isLastSlide = ref(false)
@@ -70,6 +73,29 @@ function onSlideChange() {
   }
 }
 
+//  swiper for banner
+const modules = [Scrollbar, Pagination, Autoplay, EffectCoverflow]
+const swiperBannerRef = ref<SwiperClass | null>(null)
+function onBannerSwiper(swiper: SwiperClass) {
+  swiperBannerRef.value = swiper
+}
+
+function goToNextBannerSlide() {
+  if (swiperBannerRef.value) {
+    swiperBannerRef.value.slideNext()
+  }
+}
+function goToPrevBannerSlide() {
+  if (swiperBannerRef.value) {
+    swiperBannerRef.value.slidePrev()
+  }
+}
+
+function onBannerSlideChange() {
+  // 添加移动式样
+  console.log('testClass')
+}
+
 // 路由跳转
 const router = useRouter()
 
@@ -90,17 +116,17 @@ function navigatieToGameDetail() {
 <template>
   <el-container>
     <HeaderContainer />
-    <el-main class="w-full p-[0]!">
-      <div class="bannerContainer bg-[#000] color-[#fff]">
+    <el-main class="mt-50 w-full p-[0]!" :class="{ 'mt-60 ': isPCDevice }">
+      <!-- <div class="bannerContainer bg-[#000] color-[#fff]">
         <el-carousel trigger="click" height="auto" arrow="always" indicator-position="none">
           <el-carousel-item
-            v-for="item in games" :key="item" class="relative w-[100vw] cursor-pointer"
+            v-for="item in games" :key="item.title" class="relative w-[100vw] cursor-pointer"
             :style="{ height: isPCDevice ? '540px' : '106.67vw' } "
           >
             <div :class="{ 'absolute left-0 top-0 w-full': isPCDevice }">
               <img
                 :src="isPCDevice ? item.bgImagePC : item.bgImageMobile" alt=""
-                class="h-61.33vw w-full object-contain" :class="{ 'h-auto': isPCDevice }"
+                class="bannrImgAnimation h-61.33vw w-full object-contain" :class="{ 'h-auto': isPCDevice }"
               >
             </div>
 
@@ -138,6 +164,73 @@ function navigatieToGameDetail() {
             </div>
           </el-carousel-item>
         </el-carousel>
+      </div> -->
+      <div class="bannerTest relative bg-[#000] color-[#fff]">
+        <Swiper
+          :navigation="true"
+          :autoplay="{ delay: 3000, pauseOnMouseEnter: true }"
+          :slides-per-view="1"
+          :loop="true"
+          :modules="modules"
+          @swiper="onBannerSwiper"
+          @slide-change="onBannerSlideChange"
+        >
+          <SwiperSlide
+            v-for="item in games"
+            v-slot="{ isActive }" :key="item.title" class="relative w-[100vw] cursor-pointer"
+            :style="{ height: isPCDevice ? '540px' : '106.67vw' } "
+          >
+            <div :class="{ 'absolute left-0 top-0 w-full': isPCDevice }">
+              <img
+                :src="isPCDevice ? item.bgImagePC : item.bgImageMobile" alt=""
+                class="h-61.33vw w-full object-contain" :class="{ 'h-auto': isPCDevice, 'bannrImgAnimation': isActive }"
+              >
+            </div>
+
+            <img
+              v-if="!isPCDevice" :src="item.titleImage" alt=""
+              class="absolute inset-x-0 top-61.33vw mx-auto h-25.2vw min-h-[30vw] transform -translate-y-[100%]"
+              @click="testClick"
+            >
+            <div v-if="!isPCDevice" class="mt-20 text-center">
+              <div class="h-30 text-25 leading-30" @click="testClick">
+                {{ item.title }}
+              </div>
+              <div class="h-30 text-16 leading-30">
+                {{ item.description }}
+              </div>
+              <div class="m-x-auto mt-6.66vw h-12.266vw w-89.333vw f-c cursor-pointer bg-[#d32f2f] text-18">
+                了解详情
+              </div>
+            </div>
+            <div v-if="isPCDevice" class="relative m-auto h-[100%] max-w-1560 pl-100 text-left">
+              <img :src="item.titleImage" alt="" class="mb-40.5 mt-58 h-136.5" :class="{ textImgAnimation: isActive }" @click="testClick">
+              <div class="absolute bottom-80 left-100">
+                <div class="h-63 text-50 font-450 leading-63 text-shadow" :class="{ textImgAnimation: isActive }">
+                  {{ item.title }}
+                </div>
+                <div class="h-63 text-50 font-450 leading-63 text-shadow" :class="{ textImgAnimation: isActive }">
+                  {{ item.description }}
+                </div>
+                <div
+                  class="mt-28 h-46 w-176 f-c cursor-pointer border border-[#d32f2f] border-solid border-solid bg-[#d32f2f] text-18 color-[#fff] op-[.9999]" :class="{ textImgAnimation: isActive }"
+                >
+                  了解详情
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+          <!-- 自定义导航箭头 -->
+          <div class="absolute left-0 top-[45%] z-10 h-60 w-24 f-c cursor-pointer bg-[rgba(0,0,0,.3)] color-[#d32f2f]" :class="{ 'left-20 h-80 w-40': isPCDevice }">
+            <div class="i-iconamoon:arrow-left-2-thin h-36 w-36" @click="goToPrevBannerSlide" />
+          </div>
+          <div
+            class="absolute right-0 top-[45%] z-10 h-60 w-24 f-c cursor-pointer bg-[rgba(0,0,0,.3)] color-[#d32f2f]"
+            :class="{ 'right-20 h-80 w-40': isPCDevice }"
+          >
+            <div class="i-iconamoon:arrow-right-2-thin h-36 w-36" @click="goToNextBannerSlide" />
+          </div>
+        </Swiper>
       </div>
       <div
         class="mobileGameContainer mt-45"
@@ -348,5 +441,36 @@ height: 20px;
   opacity: 1;
   -webkit-transition: all .5s;
   transition: all .5s;
+}
+
+.bannrImgAnimation {
+     -webkit-animation: fadeIn___PLlz 3s linear ;
+     animation: fadeIn___PLlz 3s linear ;
+
+}
+@keyframes fadeIn___PLlz {
+  0% {
+    transform: translateX(1%);
+  }
+  100% {
+    transform: translateX(0); /* 向左移动20px */
+  }
+}
+
+.textImgAnimation {
+  -webkit-animation: desc___3b3R8 1s linear forwards;
+  animation: desc___3b3R8 1s linear forwards;
+}
+@keyframes desc___3b3R8 {
+  0% {
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 </style>

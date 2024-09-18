@@ -12,7 +12,7 @@ interface NavbarItem {
 const navbarItems = ref<NavbarItem[]>([
   { name: 'message.home', path: '/gameHome' },
   { name: 'message.game', path: '/gameList' },
-  { name: 'message.payhub', path: '/payhub' },
+  { name: 'message.payHub', path: '/payHub' },
 ])
 const activeNavbarItem = ref('')
 function setActiveNavbarItem(name: string) {

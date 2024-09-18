@@ -6,7 +6,7 @@ const locale: LocaleMessages<any> = {
     pageTitle: '中文标题',
     game: '游戏',
     home: '首页',
-    payhub: '商店',
+    payHub: '商店',
     gameDetail: '游戏详情',
   },
 }

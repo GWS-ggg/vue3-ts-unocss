@@ -47,9 +47,6 @@ function navigationToPayHub() {
 <template>
   <div class="default">
     <div class="wrapper" lg="wrapperPC">
-      <a href="javascript:;" class="right">
-        <img src="@/assets/images/detail/right.png" alt="">
-      </a>
       <section class="kv part">
         <div class="kv_top">
           <a class="kv_logo" href="javascript:;">

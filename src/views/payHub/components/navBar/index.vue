@@ -33,7 +33,10 @@ function navigationToPayHub() {
 }
 const gameDetailVisible = ref(false)
 watchEffect(() => {
-  if (route.path !== '/payHub') {
+  if (route.path === '/payHub') {
+    gameDetailVisible.value = false
+  }
+  else {
     gameDetailVisible.value = true
   }
 })
