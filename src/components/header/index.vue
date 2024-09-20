@@ -78,40 +78,50 @@ function isLocaleKey(language: string): language is LocaleKey {
 
 <template>
   <el-header
-    class="fixed left-0 top-0 z-1000 w-[100vw] bg-[#000000] text-center p-[0]!"
-    :height="isPCDevice ? '60px' : '50px'"
+    class="fixed left-0 top-0 z-1000 w-[100vw] bg-[#222c37] text-center p-[0]!"
+    :height="isPCDevice ? '80px' : '50px'"
   >
-    <div class="h-full flex items-center px-20" :class="{ 'px-40': isPCDevice }">
+    <div class="h-full flex items-center px-20" :class="{ 'px-0': isPCDevice }">
       <div v-if="!isPCDevice" @click="toggleMenu">
         <div v-if="!isMenuVisible" class="i-ooui:menu h-24 w-24" style="color: white;" />
         <div v-else class="i-material-symbols:close h-24 w-24" style="color: white;" />
       </div>
-      <div class="h-30 w-full f-c cursor-pointer" :class="{ 'h-34  w-[120px]!': isPCDevice }">
+      <div class="h-30 w-full cursor-pointer" :class="{ 'h-52  w-[200px]! ml-34 mt-9 mb-19 ': isPCDevice }">
         <img
-          class="block h-full" src="https://lilithimage.lilithcdn.com/official-web-lilith/lilith-logo_cn%403x.png"
+          class="block h-full" src="@/assets/icons/99-logo.png"
           alt=""
         >
       </div>
       <div v-if="isPCDevice" class="w-full f-c color-[#fff]">
         <router-link
           v-for="navbaritem in navbarItems" :key="navbaritem.name" :to="navbaritem.path"
-          class="mx-[1vw] text-19 text-color-[#fff] leading-20 no-underline"
+          class="mx-[1vw] text-25 text-color-[#fff] leading-25 no-underline"
           :class="{ 'text-red-500 font-bold': activeNavbarItem === navbaritem.name }"
           @click="setActiveNavbarItem(navbaritem.name)"
         >
           {{ t(navbaritem.name) }}
         </router-link>
       </div>
-      <div class="color-[#fff]">
-        <el-select
-          v-model="selectedLanguage" placeholder="Select" style="width: 80px" class="custom-select"
-          :teleported="false"
-        >
-          <el-option
-            v-for="item in LanguageOptions" :key="item.value" :label="item.label" :value="item.value"
-            @click="changeLanguage(item.value)"
-          />
-        </el-select>
+      <div class="mr-27 f-b text-18 color-[#fff]">
+        <div class="f-c">
+          <!-- <div class="w-100 overflow-auto overflow-unset">
+            Save to Desktop
+          </div>
+          <div class="i-mingcute:download-line h-[46px] w-[46px]" style="color: white;" /> -->
+          <img src="@/assets/icons/download.png" alt="">
+        </div>
+        <div class="f-c">
+          <el-select
+            v-model="selectedLanguage" placeholder="Select" style="width: 48px;" class="custom-select"
+            :teleported="false"
+          >
+            <el-option
+              v-for="item in LanguageOptions" :key="item.value" :label="item.label" :value="item.value"
+              @click="changeLanguage(item.value)"
+            />
+          </el-select>
+          <img src="@/assets/icons/global-icon.png" alt="">
+        </div>
       </div>
     </div>
   </el-header>
@@ -142,7 +152,8 @@ position: relative;
 }
 
 :deep(.el-select__wrapper) {
-  background-color: #000000;
+  padding-right: 0;
+  background-color: #222c37;
   box-shadow: none;
 }
 
@@ -181,6 +192,10 @@ background: #fff;
 :deep(.el-popper__arrow) {
 display: none;
 /* 隐藏小三角图标 */
+}
+// 隐藏语言下拉图标
+:deep(.el-select__suffix) {
+display: none;
 }
 
 :deep(.el-carousel__arrow) {
