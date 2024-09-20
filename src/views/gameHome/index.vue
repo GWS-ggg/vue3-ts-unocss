@@ -117,54 +117,6 @@ function navigatieToGameDetail() {
   <el-container>
     <HeaderContainer />
     <el-main class="mt-50 w-full p-[0]!" :class="{ 'mt-60 ': isPCDevice }">
-      <!-- <div class="bannerContainer bg-[#000] color-[#fff]">
-        <el-carousel trigger="click" height="auto" arrow="always" indicator-position="none">
-          <el-carousel-item
-            v-for="item in games" :key="item.title" class="relative w-[100vw] cursor-pointer"
-            :style="{ height: isPCDevice ? '540px' : '106.67vw' } "
-          >
-            <div :class="{ 'absolute left-0 top-0 w-full': isPCDevice }">
-              <img
-                :src="isPCDevice ? item.bgImagePC : item.bgImageMobile" alt=""
-                class="bannrImgAnimation h-61.33vw w-full object-contain" :class="{ 'h-auto': isPCDevice }"
-              >
-            </div>
-
-            <img
-              v-if="!isPCDevice" :src="item.titleImage" alt=""
-              class="absolute inset-x-0 top-61.33vw mx-auto h-25.2vw min-h-[30vw] transform -translate-y-[100%]"
-              @click="testClick"
-            >
-            <div v-if="!isPCDevice" class="mt-20 text-center">
-              <div class="h-30 text-25 leading-30" @click="testClick">
-                {{ item.title }}
-              </div>
-              <div class="h-30 text-16 leading-30">
-                {{ item.description }}
-              </div>
-              <div class="m-x-auto mt-6.66vw h-12.266vw w-89.333vw f-c cursor-pointer bg-[#d32f2f] text-18">
-                了解详情
-              </div>
-            </div>
-            <div v-if="isPCDevice" class="relative m-auto h-[100%] max-w-1560 pl-100 text-left">
-              <img :src="item.titleImage" alt="" class="mb-40.5 mt-58 h-136.5" @click="testClick">
-              <div class="absolute bottom-80 left-100">
-                <div class="h-63 text-50 font-450 leading-63 text-shadow">
-                  {{ item.title }}
-                </div>
-                <div class="h-63 text-50 font-450 leading-63 text-shadow">
-                  {{ item.description }}
-                </div>
-                <div
-                  class="mt-28 h-46 w-176 f-c cursor-pointer border border-[#d32f2f] border-solid border-solid bg-[#d32f2f] text-18 color-[#fff] op-[.9999]"
-                >
-                  了解详情
-                </div>
-              </div>
-            </div>
-          </el-carousel-item>
-        </el-carousel>
-      </div> -->
       <div class="bannerTest relative bg-[#000] color-[#fff]">
         <Swiper
           :navigation="true"
@@ -186,7 +138,6 @@ function navigatieToGameDetail() {
                 class="h-61.33vw w-full object-contain" :class="{ 'h-auto': isPCDevice, 'bannrImgAnimation': isActive }"
               >
             </div>
-
             <img
               v-if="!isPCDevice" :src="item.titleImage" alt=""
               class="absolute inset-x-0 top-61.33vw mx-auto h-25.2vw min-h-[30vw] transform -translate-y-[100%]"

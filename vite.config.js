@@ -56,14 +56,31 @@ export default defineConfig({
       'Api': path.resolve(__dirname, 'src/api'),
     },
   },
+  // server: {
+  //   port: 3000, // 本地开发服务端口
+  //   proxy: {
+  //     '/API': {
+  //       target: 'http://127.0.0.3:62000', // 要代理的地址
+  //       changeOrigin: true,
+  //       followRedirects: true, // Cookie支持重定向
+  //       rewrite(path) { return path.replace(/^\/API/, '') },
+  //     },
+  //   },
+  // },
   server: {
-    port: 3000, // 本地开发服务端口
+    https: false,
+    // Listening on all local IPs
+    host: true,
+    port: 5173,
+    // Load proxy configuration from .env
     proxy: {
-      '/API': {
-        target: 'http://127.0.0.3:62000', // 要代理的地址
+      '/box': {
+        target: 'https://mprogram-test.forevernine.com/',
         changeOrigin: true,
-        followRedirects: true, // Cookie支持重定向
-        rewrite(path) { return path.replace(/^\/API/, '') },
+      },
+      '/wxpay': {
+        target: 'https://mprogram-test.forevernine.com/',
+        changeOrigin: true,
       },
     },
   },
@@ -95,7 +112,7 @@ export default defineConfig({
           selectorBlackList: ['norem', 'ignore'], // 过滤掉norem-开头的class，不进行rem转换
           mediaQuery: false, // 允许在媒体查询中转换 px
           exclude: (e) => { // 只对src/views/gameDetail文件进行px转rem，其他文件不转换
-            if (/src(\\|\/)views(\\|\/)gameDetail/.test(e)) {
+            if (/src\/views\/gameDetail/.test(e)) {
               return false
             }
             else {

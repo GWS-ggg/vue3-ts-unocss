@@ -1,6 +1,5 @@
 // uno.config.ts
 import { defineConfig, presetAttributify, presetIcons, presetUno, transformerDirectives } from 'unocss'
-import type { RemToPxOptions } from '@unocss/preset-rem-to-px'
 import presetRemToPx from '@unocss/preset-rem-to-px'
 import UnocssIcons from '@unocss/preset-icons'
 

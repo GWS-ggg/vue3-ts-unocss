@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import HeaderContainer from '@/components/header/index.vue'
+import { ElMessage } from 'element-plus'
+
+function open4() {
+  ElMessage.error('Oops, this is a error message.')
+}
 </script>
 
 <template>
-  <HeaderContainer />
+  <el-button :plain="true" @click="open4">
+    Error
+  </el-button>
 </template>

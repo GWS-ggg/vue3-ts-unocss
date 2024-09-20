@@ -9,7 +9,12 @@ const props = defineProps<{
 }>()
 const router = useRouter()
 function navigateToDetail() {
-  router.push(`/payDetail/${props.title}`) // 使用 props.title 作为参数
+  router.push({
+    path: `/payDetail/${props.title}`,
+    query: {
+      appid: '512225141159476',
+    },
+  })
 }
 </script>
 

@@ -1,36 +1,58 @@
 <script setup lang="ts">
-interface PayMethod {
-  id: number
-  name: string
-  description: string
-  logo: string
+import type { PaymethodType, Product } from '@/types/index'
+import { getPriceStr } from '@/utils'
+
+// interface PayMethod {
+//   id: number
+//   name: string
+//   description: string
+//   logo: string
+// }
+interface Props {
+  selectedProduct: Product | null
+  payMethodList: PaymethodType[]
+  currencyCode: string
 }
+const props = withDefaults(defineProps<Props>(), {
+  selectedProduct: null,
+  currencyCode: '',
+})
+const emit = defineEmits(['onCloseDialog', 'checkout', 'changePayMethod'])
 
-const emit = defineEmits(['onCloseDialog'])
+const selectedMethod = ref<PaymethodType | null>(null)
 
-const selectedMethod = ref<number | null>(null)
+// const payMethods: PayMethod[] = [
+//   {
+//     id: 1,
+//     name: '支付宝',
+//     description: 'Alipay',
+//     logo: '/src/assets/icons/alipay-log.png',
+//   },
+//   {
+//     id: 2,
+//     name: '微信支付',
+//     description: 'WeChat Pay',
+//     logo: '/src/assets/icons/wechat-pay-logo.png',
+//   },
+// ]
 
-const payMethods: PayMethod[] = [
-  {
-    id: 1,
-    name: '支付宝',
-    description: 'Alipay',
-    logo: '/src/assets/icons/alipay-log.png',
-  },
-  {
-    id: 2,
-    name: '微信支付',
-    description: 'WeChat Pay',
-    logo: '/src/assets/icons/wechat-pay-logo.png',
-  },
-]
-
-function selectMethod(id: number) {
-  selectedMethod.value = id
+function selectMethod(method: PaymethodType) {
+  selectedMethod.value = method
+  emit('changePayMethod', method)
 }
 
 function handleClose() {
   emit('onCloseDialog')
+}
+
+const priceStr = computed(() => {
+  if (!props.selectedProduct)
+    return ''
+  return getPriceStr(props.selectedProduct, props.currencyCode)
+})
+
+function checkout() {
+  emit('checkout')
 }
 </script>
 
@@ -68,10 +90,10 @@ function handleClose() {
             <div class="flex justify-start px-10">
               <div
                 class="h-56 w-98 rounded-12 bg-contain bg-no-repeat"
-                style="background-image: url('https://imv2.lilithgame.com/pluto/mall/uat/uploads/1725264449185.png?x-oss-process=image/format,webp')"
+                :style="`background-image: url(${selectedProduct?.img})`"
               />
               <div class="f-c p-10 font-bold">
-                20龙焰晶
+                {{ selectedProduct?.title }}
               </div>
             </div>
           </div>
@@ -85,13 +107,13 @@ function handleClose() {
                 </p>
               </div>
               <div
-                v-for="method in payMethods"
-                :key="method.id"
+                v-for="method in payMethodList"
+                :key="method.payType"
                 class="payList mb-10 h-40 f-c cursor-pointer rounded-8"
-                :class="selectedMethod === method.id ? 'border border-solid border-[#d32f2f] bg-[#fff8f8]' : 'b-s bg-[#fff]'"
-                @click="selectMethod(method.id)"
+                :class="selectedMethod === method ? 'border border-solid border-[#d32f2f] bg-[#fff8f8]' : 'b-s bg-[#fff]'"
+                @click="selectMethod(method)"
               >
-                <img :src="method.logo" :alt="method.description" class="max-h-30 max-w-[40%]">
+                <img :src="method.icon" :alt="method.name" class="max-h-30 max-w-[40%]">
               </div>
             </div>
           </div>
@@ -99,17 +121,17 @@ function handleClose() {
             <div class="mt-15 px-10">
               <div class="mb-5 h-24 f-b text-14">
                 <span class="min-w-70 color-[#666666]">商品价格:</span>
-                <span class="color-red-600 font-medium">$ 6.00</span>
+                <span class="color-red-600 font-medium">{{ priceStr }}</span>
               </div>
             </div>
             <div class="flex flex-col gap-12">
               <div class="f-s text-16 leading-16">
                 <p>合计：</p>
                 <div class="text-18 color-red-6 font-bold">
-                  ￥ 6.00
+                  {{ priceStr }}
                 </div>
               </div>
-              <div class="mr-10 h-44 w-full f-c cursor-pointer rounded-25 bg-[#f54042] text-18 color-[#fff]">
+              <div class="mr-10 h-44 w-full f-c cursor-pointer rounded-25 bg-[#f54042] text-18 color-[#fff]" @click="checkout">
                 立即支付
               </div>
             </div>

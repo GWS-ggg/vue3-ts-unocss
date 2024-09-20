@@ -33,3 +33,4 @@ export function setLocale(locale: LocaleKey) {
   i18n.global.locale.value = locale
   localStorage.setItem('lang', locale)
 }
+export default i18n
