@@ -7,6 +7,7 @@ const locale: LocaleMessages<any> = {
     game: '游戏',
     home: '首页',
     payHub: '商店',
+    purchurse: '商店',
     gameDetail: '游戏详情',
     uid_check: 'UID驗證',
     user_info: '個人資訊',

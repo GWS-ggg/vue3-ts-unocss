@@ -107,7 +107,7 @@ export default defineConfig({
       plugins: [
         postCssPxToRem({
           // 自适应，px>rem转换
-          rootValue: 16, // 这里代表的是1rem等于多少rootValue的px。75表示750设计稿，37.5表示375设计稿
+          rootValue: 100, // 这里代表的是1rem等于多少rootValue的px。75表示750设计稿，37.5表示375设计稿
           propList: ['*'], // 需要转换的属性，这里选择全部都进行转换
           selectorBlackList: ['norem', 'ignore'], // 过滤掉norem-开头的class，不进行rem转换
           mediaQuery: false, // 允许在媒体查询中转换 px
@@ -116,7 +116,7 @@ export default defineConfig({
               return false
             }
             else {
-              return true
+              return false
             }
           },
         }),

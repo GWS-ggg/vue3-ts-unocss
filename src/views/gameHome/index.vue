@@ -91,10 +91,10 @@ function goToPrevBannerSlide() {
   }
 }
 
-function onBannerSlideChange() {
-  // 添加移动式样
-  console.log('testClass')
-}
+// function onBannerSlideChange() {
+//   // 添加移动式样
+//   console.log('testClass')
+// }
 
 // 路由跳转
 const router = useRouter()
@@ -114,7 +114,7 @@ function navigatieToGameDetail() {
 </script>
 
 <template>
-  <el-container>
+  <div class="h-[100%] w-[100vw]">
     <HeaderContainer />
     <el-main class="mt-50 w-full p-[0]!" :class="{ 'mt-60 ': isPCDevice }">
       <div class="bannerTest relative bg-[#000] color-[#fff]">
@@ -125,7 +125,6 @@ function navigatieToGameDetail() {
           :loop="true"
           :modules="modules"
           @swiper="onBannerSwiper"
-          @slide-change="onBannerSlideChange"
         >
           <SwiperSlide
             v-for="item in games"
@@ -265,11 +264,22 @@ function navigatieToGameDetail() {
         </div>
       </div>
     </el-main>
-  </el-container>
+  </div>
   <FooterContainer />
 </template>
 
 <style lang="less" scoped>
+/* 隐藏滚动条 */
+.element-with-scroll {
+   overflow-y: hidden; /* 或者 overflow-y: auto; 或者 overflow-x: auto; */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 和 Edge */
+}
+
+/* 隐藏滚动条 */
+.element-with-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari 和 Opera */
+}
 :deep(.el-select__placeholder) {
   color: #fff
 }
