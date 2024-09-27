@@ -116,7 +116,7 @@ function navigatieToGameDetail() {
 <template>
   <div class="h-[100%] w-[100vw]">
     <HeaderContainer />
-    <el-main class="mt-50 w-full p-[0]!" :class="{ 'mt-60 ': isPCDevice }">
+    <el-main class="mt-80 w-full p-[0]!" :class="{ 'mt-60 ': isPCDevice }">
       <div class="bannerTest relative bg-[#000] color-[#fff]">
         <Swiper
           :navigation="true"
@@ -128,28 +128,22 @@ function navigatieToGameDetail() {
         >
           <SwiperSlide
             v-for="item in games"
-            v-slot="{ isActive }" :key="item.title" class="relative w-[100vw] cursor-pointer"
-            :style="{ height: isPCDevice ? '540px' : '106.67vw' } "
+            v-slot="{ isActive }" :key="item.title" class="relative w-750 cursor-pointer"
+            :style="{ height: isPCDevice ? '540px' : '827px' } "
           >
             <div :class="{ 'absolute left-0 top-0 w-full': isPCDevice }">
               <img
                 :src="isPCDevice ? item.bgImagePC : item.bgImageMobile" alt=""
-                class="h-61.33vw w-full object-contain" :class="{ 'h-auto': isPCDevice, 'bannrImgAnimation': isActive }"
+                class="h-61.33vw w-full object-contain" :class="{ 'h-auto': isPCDevice, 'bannrImgAnimation': isActive && isPCDevice }"
               >
             </div>
-            <img
-              v-if="!isPCDevice" :src="item.titleImage" alt=""
-              class="absolute inset-x-0 top-61.33vw mx-auto h-25.2vw min-h-[30vw] transform -translate-y-[100%]"
-              @click="testClick"
-            >
+
             <div v-if="!isPCDevice" class="mt-20 text-center">
-              <div class="h-30 text-25 leading-30" @click="testClick">
+              <div class="h-48 text-48 leading-48" @click="testClick">
                 {{ item.title }}
               </div>
-              <div class="h-30 text-16 leading-30">
-                {{ item.description }}
-              </div>
-              <div class="m-x-auto mt-6.66vw h-12.266vw w-89.333vw f-c cursor-pointer bg-[#d32f2f] text-18">
+
+              <div class="m-x-auto mt-6.66vw h-12.266vw w-89.333vw f-c cursor-pointer bg-[#FF6A00] text-36">
                 了解详情
               </div>
             </div>
@@ -186,39 +180,36 @@ function navigatieToGameDetail() {
         class="mobileGameContainer mt-45"
         :class="{ 'w-full text-center m-auto relative px-40 min-w-1440 max-w-1560 ': isPCDevice }"
       >
-        <div class="gameTitle mb-15 f-s pl-20" :class="{ ' w-full max-w-1560 pl-[0]! ': isPCDevice }">
-          <div class="text-22" :class="{ 'text-30': isPCDevice }">
-            <span class="color-[#333]">{{ t('message.game') }}</span>
+        <div class="gameTitle mb-15 ml-55 h-40 f-s" :class="{ ' w-full max-w-1560 pl-[0]! ': isPCDevice }">
+          <div class="text-40">
+            <span class="color-[#222C37]">{{ t('message.games') }}</span>
           </div>
-          <div v-if="isPCDevice" class="ml-12 f-c cursor-pointer text-18 color-[#d32f2f]" @click="navigatieToGameList">
-            <span>查看所有游戏</span>
-            <div class="i-iconamoon:arrow-right-2 ml-4 h-20 w-20" style="color: #e21818;" />
+          <div v-if="isPCDevice" class="ml-12 h-full flex cursor-pointer items-end text-25 color-[#ed6504]" @click="navigatieToGameList">
+            <span>{{ t('message.viewsAll') }}</span>
+            <div class="mb-4 ml-4 h-20 w-20">
+              <img src="@/assets/icons/rightArrow.png" class="h-20 w-20" alt="">
+            </div>
           </div>
-          <div v-if="!isPCDevice" class="i-iconamoon:arrow-right-2 ml-16 h-20 w-20" style="color: #e21818;" @click="navigatieToGameList" />
+          <div v-if="!isPCDevice" class="ml-16 h-full w-30 f-c" @click="navigatieToGameList">
+            <img src="@/assets/icons/rightArrow.png" class="h-25 w-25" alt="">
+          </div>
           <!-- 跳转到游戏列表 -->
         </div>
         <div
           v-if="!isPCDevice"
-          class="scrollbar-hidden mobileGameList w-full overflow-x-auto overflow-y-hidden whitespace-nowrap pb-30 text-left"
+          class="element-with-scroll mobileGameList ml-35 w-full overflow-x-auto overflow-y-hidden whitespace-nowrap pb-30"
         >
           <div
-            v-for="gameCardItem in gameCardList" :key="gameCardItem.title" class="relative ml-20 inline-block h-full w-47.2vw cursor-pointer"
+            v-for="gameCardItem in gameCardList" :key="gameCardItem.title" class="relative ml-20 mr-82 inline-block h-625 w-375 cursor-pointer"
             @click="navigatieToGameDetail"
           >
-            <div class="relative h-66.133vw w-full">
+            <div class="relative h-full w-full">
               <img :src="gameCardItem.bgImage" class="h-full w-full" alt="">
               <div
-                class="mobileGameCardDesc absolute bottom-0 left-0 z-0 h-26.133vw w-full text-center text-16 color-[#fff] leading-26.133vw"
+                class="mobileGameCardDesc absolute bottom-0 left-0 z-0 h-75 w-full text-center text-30 color-[#fff] leading-30"
               >
                 {{ gameCardItem.title }}
               </div>
-            </div>
-            <div class="gameLogo relative mx-auto h-70 w-70 op-[.999] -mt-30">
-              <img
-                :src="gameCardItem.logoImage" alt=""
-                class="gameLogoBlur absolute bottom-10 left-10 h-50 w-50 rounded-15 -z-2"
-              >
-              <img :src="gameCardItem.logoImage" alt="" class="h-60 w-60 rounded-15 op-[.99999]">
             </div>
           </div>
         </div>
@@ -230,35 +221,32 @@ function navigatieToGameDetail() {
                   <div class="relative h-454 overflow-hidden">
                     <img :src="slide.bgImage" :alt="slide.title" class="block w-full">
                     <div class="gameCardPCDesc absolute bottom-0 z-0 h-228 w-full f-e flex-col color-[#fff]">
-                      <div class="gameTitlePCShadow overflow-hidden text-ellipsis whitespace-nowrap text-24">
+                      <div class="gameTitlePCShadow mb-45 overflow-hidden text-ellipsis whitespace-nowrap text-24">
                         {{ slide.title }}
                       </div>
-                      <div class="gameTitlePCDesc mb-80 mt-12 overflow-hidden text-ellipsis text-14 leading-18">
+                      <!-- <div class="gameTitlePCDesc mb-80 mt-12 overflow-hidden text-ellipsis text-14 leading-18">
                         {{ slide.title }}
-                      </div>
+                      </div> -->
                     </div>
-                  </div>
-                  <div class="relative mx-auto h-100 w-100 -mt-50">
-                    <img
-                      :src="slide.logoImage"
-                      class="gameLogoBlur absolute left-5 top-10 h-90 w-90 rounded-25 op-[.999] -z-1" alt=""
-                    >
-                    <img :src="slide.logoImage" class="h-full w-full rounded-25 op-[.999]" alt="">
                   </div>
                 </div>
               </SwiperSlide>
             </Swiper>
             <div
-              class="swiperArrowShadow absolute left-0 top-[40%] z-100 h-40 w-40 f-c cursor-pointer rounded-[50%] bg-[#fff] color-[#666]"
+              class="absolute top-[40%] z-100 f-c cursor-pointer -left-60"
               :class="{ 'op-0': isFirstSlide }" @click="goToPrevSlide"
             >
-              <div class="i-iconamoon:arrow-left-2-thin h-24 w-24" />
+              <div>
+                <img class="h-60 w-80" src="@/assets/icons/left.png" alt="">
+              </div>
             </div>
             <div
-              class="swiperArrowShadow absolute right-0 top-[40%] z-100 h-40 w-40 f-c cursor-pointer rounded-[50%] bg-[#fff] color-[#666]"
+              class="absolute top-[40%] z-100 f-c cursor-pointer -right-60"
               :class="{ 'op-0': isLastSlide }" @click="goToNextSlide"
             >
-              <div class="i-iconamoon:arrow-right-2-thin h-24 w-24" />
+              <div>
+                <img class="h-60 w-80" src="@/assets/icons/right.png" alt="">
+              </div>
             </div>
           </div>
         </div>
@@ -270,8 +258,7 @@ function navigatieToGameDetail() {
 
 <style lang="less" scoped>
 /* 隐藏滚动条 */
-.element-with-scroll {
-   overflow-y: hidden; /* 或者 overflow-y: auto; 或者 overflow-x: auto; */
+.element-with-scroll { /* 或者 overflow-y: auto; 或者 overflow-x: auto; */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 和 Edge */
 }

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import NavBar from '../payHub/components/navBar/index.vue'
 import OrderDialog from './components/gameOrder/index.vue'
 import OrderPop from './components/gameOrderPop/index.vue'
 import GameLogin from './components/gameLogin/index.vue'
@@ -9,6 +8,7 @@ import PopVue from './components/pop/index.vue'
 import Paypal from './components/paypal/index.vue'
 import Mycard from './components/mycard/index.vue'
 import { filterPaymentMethods, getRebateAmount } from './index'
+import NavBar from '@/components/header/index.vue'
 import { isPCDevice } from '@/utils/flexible'
 import { Toast, initToast } from '@/utils/toast'
 import { getPayDataApi, initH5PayApi, myCardOrderApi, orderStasuApi, paypalSettleApi } from '@/api'
@@ -657,7 +657,7 @@ function showSuccessPop() {
 <template>
   <div class="scrollbarWidth h-[100vh] w-[100vw] overflow-x-hidden overflow-y-auto bg-[#f4f4f4]">
     <NavBar />
-    <div class="mt-44" :class="{ imageMarginTop: isPCDevice }">
+    <div class="mt-80" :class="{ imageMarginTop: isPCDevice }">
       <div class="relative h-auto w-full overflow-hidden">
         <img src="@/assets/images/home.jpg" alt="Header" class="w-full">
       </div>

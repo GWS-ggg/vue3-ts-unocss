@@ -33,6 +33,9 @@ function initializeNavbarItem() {
   else if (currentRoute === 'gameList') {
     activeNavbarItem.value = 'message.game'
   }
+  else if (currentRoute === 'payHub') {
+    activeNavbarItem.value = 'message.purchurse'
+  }
 }
 
 initializeNavbarItem()
@@ -112,7 +115,7 @@ function isLocaleKey(language: string): language is LocaleKey {
         <router-link
           v-for="navbaritem in navbarItems" :key="navbaritem.name" :to="navbaritem.path"
           class="mx-[1vw] text-25 text-color-[#fff] leading-25 no-underline"
-          :class="{ 'text-red-500 font-bold': activeNavbarItem === navbaritem.name }"
+          :class="{ 'text-[#FF6A00]! font-bold': activeNavbarItem === navbaritem.name }"
           @click="setActiveNavbarItem(navbaritem.name)"
         >
           {{ t(navbaritem.name) }}
@@ -143,10 +146,10 @@ function isLocaleKey(language: string): language is LocaleKey {
 
     <div v-show="isMenuVisible" class="linkMask fixed bottom-0 left-0 right-0 top-0 z-10" @click="closeMenu" />
     <div v-show="isMenuVisible" class="fixed left-0 top-80 z-1000 h-[100%] w-[62.5vw] bg-[#222C37] text-30 color-[#fff]">
-      <div class="flex flex-col items-start px-26">
+      <div class="w-full flex flex-col items-start px-26">
         <router-link
           v-for="navbaritem in navbarItems" :key="navbaritem.name" :to="navbaritem.path"
-          class="text-color-[#fff] no-underline"
+          class="w-full f-s text-color-[#fff] no-underline"
           :class="{ 'text-[#FF6A00]! font-bold': activeNavbarItem === navbaritem.name }"
           @click="setActiveNavbarItem(navbaritem.name)"
         >

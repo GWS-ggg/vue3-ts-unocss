@@ -9,6 +9,9 @@ const locale: LocaleMessages<any> = {
     payHub: 'Payhub',
     gameDetail: 'GAMEDETAIL',
     purchurse: 'Purchurse',
+    viewsAll: 'views All',
+    games: 'GAMES',
+    ourGames: 'OUR GAMES',
   },
 }
 

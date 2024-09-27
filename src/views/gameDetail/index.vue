@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import HeaderContainer from '@/components/header/index.vue'
 import FooterContainer from '@/components/footer/index.vue'
 // 动态调整根元素的字体大小
 function setRemUnit() {
@@ -27,172 +27,28 @@ onMounted(() => {
   window.addEventListener('resize', setRemUnit)
 })
 
-const linkVisible = ref<boolean>(false)
-function handleLinkClick() {
-  linkVisible.value = !linkVisible.value
-}
+// const linkVisible = ref<boolean>(false)
+// function handleLinkClick() {
+//   linkVisible.value = !linkVisible.value
+// }
 
-const languageVisible = ref(false)
-function handlelanguageClick() {
-  languageVisible.value = !languageVisible.value
-}
+// const languageVisible = ref(false)
+// function handlelanguageClick() {
+//   languageVisible.value = !languageVisible.value
+// }
 
-// 路由跳转
-const router = useRouter()
-function navigationToPayHub() {
-  router.push('/payDetail/xxx')
-}
+// // 路由跳转
+// const router = useRouter()
+// function navigationToPayHub() {
+//   router.push('/payDetail/xxx')
+// }
 </script>
 
 <template>
   <div class="default">
     <div class="wrapper" lg="wrapperPC">
+      <HeaderContainer />
       <section class="kv part">
-        <div class="kv_top">
-          <a class="kv_logo" href="javascript:;">
-            <img src="@/assets/images/detail/kv_logo.png" alt=""></a>
-          <div class="kv_r">
-            <div class="kv_btn2">
-              <ul class="lang-menu kv_ul">
-                <li data-lang="zh_TW">
-                  繁體中文
-                </li>
-                <li data-lang="en">
-                  English
-                </li>
-                <li data-lang="ar">
-                  العربية
-                </li>
-                <li data-lang="de">
-                  Deutsch
-                </li>
-                <li data-lang="es">
-                  Español
-                </li>
-                <li data-lang="fr">
-                  Français
-                </li>
-                <li data-lang="id">
-                  Bahasa Indonesia
-                </li>
-                <li data-lang="it">
-                  Italiano
-                </li>
-                <li data-lang="pl">
-                  Polski
-                </li>
-                <li data-lang="pt_BR">
-                  Português
-                </li>
-                <li data-lang="ru">
-                  Русский
-                </li>
-                <li data-lang="th">
-                  ภาษาไทย
-                </li>
-                <li data-lang="tr">
-                  Türkçe
-                </li>
-                <li data-lang="vi">
-                  Tiếng Việt
-                </li>
-              </ul>
-            </div>
-            <div
-              target="_blank"
-              class="kv_btn kv_purchase cursor-pointer" @click="navigationToPayHub"
-            />
-            <div class="kv_btn">
-              <span data-lilac="" data-lilac-key-="pro3">PLAY NOW!</span>
-              <div class="kv_ul">
-                <a class="ioslink" target="_blank" href="https://apps.apple.com/us/app/call-of-dragons/id1605558677">
-                  <img src="https://onestop.63cj.com/locRes?id=apple&amp;lang=default&amp;name=samo_2" alt="">
-                </a>
-                <a
-                  class="anlink" target="_blank"
-                  href="https://play.google.com/store/apps/details?id=com.farlightgames.samo.gp"
-                >
-                  <img src="https://onestop.63cj.com/locRes?id=google&amp;lang=default&amp;name=samo_2" alt="">
-                </a>
-                <a class="kv_down3" href="javascript:;">
-                  <img src="@/assets/images/detail/kv_down2.png" alt="">
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="m_kv_top">
-          <div class="kv_logo">
-            <img block w-full src="@/assets/images/detail/kv_logo.png" alt="">
-          </div>
-          <div class="kv_purchase kv_btn" @click="navigationToPayHub" />
-          <div class="kv_btn m_kv_btn" :class="{ ' on ': linkVisible }" @click="handleLinkClick">
-            <span>PLAY NOW!</span>
-            <div class="kv_ul m_kv_ul">
-              <a href="#" class="ioslink">
-                <img w-full src="https://onestop.63cj.com/locRes?id=apple&lang=default&name=samo_2" alt="">
-              </a>
-              <a href="#" class="anlink">
-                <img w-full src="https://onestop.63cj.com/locRes?id=google&lang=default&name=samo_2" alt="">
-              </a>
-              <a href="#" class="kv_down3">
-                <img w-full src="@/assets/images/detail/kv_down2.png" alt="">
-              </a>
-            </div>
-          </div>
-          <div class="kv_left">
-            <a href="javascript:;" class="btn-slide">
-              <i class="draw" title="" />
-            </a>
-            <div class="lang-box kv_lanuage" :class="{ ' on ': languageVisible }" @click="handlelanguageClick">
-              <ul class="lang-menu m_lanuage">
-                <li data-lang="zh_TW">
-                  繁體中文
-                </li>
-                <li data-lang="en">
-                  English
-                </li>
-                <li data-lang="ar">
-                  العربية
-                </li>
-                <li data-lang="de">
-                  Deutsch
-                </li>
-                <li data-lang="es">
-                  Español
-                </li>
-                <li data-lang="fr">
-                  Français
-                </li>
-                <li data-lang="id">
-                  Bahasa Indonesia
-                </li>
-                <li data-lang="it">
-                  Italiano
-                </li>
-                <li data-lang="pl">
-                  Polski
-                </li>
-                <li data-lang="pt_BR">
-                  Português
-                </li>
-                <li data-lang="ru">
-                  Русский
-                </li>
-                <li data-lang="th">
-                  ภาษาไทย
-                </li>
-                <li data-lang="tr">
-                  Türkçe
-                </li>
-                <li data-lang="vi">
-                  Tiếng Việt
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
         <div class="kv_slogan">
           <div>
             <p class="kv_slogan1" data-lilac="" data-lilac-key-="home1">
@@ -224,7 +80,9 @@ function navigationToPayHub() {
           <a target="_blank" href="https://play.google.com/store/apps/details?id=com.farlightgames.samo.gp">
             <img src="https://onestop.63cj.com/locRes?id=google&amp;lang=default&amp;name=samo_2" alt="">
           </a>
-          <a class="kv_down3 ml-3" href="javascript:;" />
+          <a target="_blank" href="https://play.google.com/store/apps/details?id=com.farlightgames.samo.gp">
+            <img src="@/assets/images/detail/apk.png" alt="">
+          </a>
         </div>
       </section>
       <section class="part bg5">
@@ -264,6 +122,9 @@ function navigationToPayHub() {
           <i class="ani bottom_r fadeInRight" />
         </div>
       </section>
+      <div w-full class="bg-[#222C37]">
+        <img src="@/assets/images/detail/star.png" alt="">
+      </div>
     </div>
   </div>
   <FooterContainer />
@@ -568,18 +429,17 @@ function navigationToPayHub() {
       }
     }
 
+    a:nth-of-type(2) {
+      margin-right: 0.25rem;
+    }
     a:nth-of-type(2) img {
-      margin-left: 0.05rem;
-      height: 1.08rem;
+      width: 273px;
+      height: 108px;
     }
 
     a:nth-of-type(3) {
-      width: 2.6rem;
-      height: 0.85rem;
-      text-align: left;
-      text-indent: 9999px;
-      background: url('/src/assets/images/detail/kv_down2.png') 0 0 no-repeat;
-      background-size: auto 100%;
+      margin-left: 0.05rem;
+
     }
   }
 
@@ -589,9 +449,9 @@ function navigationToPayHub() {
   }
 
   .bg5 {
-    background-image: url(https://lilithimage.lilithcdn.com/pub/common/base/bg5.jpg);
     height: 3.5rem;
     background-position: bottom;
+   background-color:#222C37 ;
   }
 
   .part5_link {
@@ -965,18 +825,11 @@ function navigationToPayHub() {
     }
 
     a:nth-of-type(3) {
-      display: flex;
-      align-items: center;
-      padding-left: 0.95rem;
-      margin-left: 0.2rem;
-      width: 2.25rem;
+      width: auto;
       height: 0.85rem;
-      font-size: 0.22rem;
       /* font-weight: bold; */
       color: #fff;
-      background: url('/src/assets/images/detail/kv_down2.png') no-repeat center / 100%;
-      transform: scale(1);
-      box-sizing: border-box;
+
     }
 
     img {
@@ -986,11 +839,11 @@ function navigationToPayHub() {
   }
 
   .bg5 {
-    direction: ltr;
     position: relative;
-    background-image:url(https://lilithimage.lilithcdn.com/pub/common/base/part5.jpg);
     height: 3.15rem;
-    background-position: center
+    background-position: center;
+    background-color: #222C37;
+    direction: ltr;
   }
 
   .part5_link {

@@ -23,23 +23,26 @@ function navigateToDetail() {
     class="relative mt-13 min-w-165 w-[calc((100%-10px)/2)] flex flex-col rounded-16 shadow-md lg:w-[calc((100%-48px)/4)] md:w-[calc((100%-24px)/3)]"
     :class="{ gameCardMobile: isPCDevice }"
   >
-    <div class="h-100 overflow-hidden rounded-t-16">
+    <div class="h-115 overflow-hidden rounded-t-16">
       <img :src="image" alt="" class="h-120 w-[110%] translate-x-[-5%] translate-y-[-15px] transform object-cover filter-blur-8">
     </div>
     <div class="gameItemWrap" :class="{ gameItemWrapMobile: isPCDevice }">
       <div class="text-center -mt-35">
         <img :src="image" alt="Game Image" class="h-65 w-65 rounded-16" :class="{ gameIconMobile: isPCDevice }">
-        <div class="gameItemName" :class="{ gameItemNameMobile: isPCDevice }">
+        <div class="gameItemName" :class="{ 'gameItemNamePC': isPCDevice, 'norem-minFontSize': !isPCDevice }">
           {{ title }}
         </div>
       </div>
       <div class="flex flex-wrap" :class="{ btnWrapMobile: isPCDevice }">
         <div
-          class="relative h-36 w-full f-b flex-1 cursor-pointer rounded-31 bg-red-500 px-10 py-0 text-center text-14 color-[#fff] leading-14 opacity-100"
+          class="relative mt-15 h-46 w-full f-b flex-1 cursor-pointer rounded-31 bg-[#ED6504] px-10 py-0 text-center color-[#fff] leading-14 opacity-100"
           :class="{ gameItemBtnMobile: isPCDevice }"
           @click="navigateToDetail"
         >
-          <span class="w-full flex-1 text-center text-14 leading-14">立即进入</span>
+          <div class="relative w-full f-c flex flex-1 text-center text-25 leading-14">
+            <div>立即进入</div>
+            <div class="i-solar:alt-arrow-right-line-duotone absolute right-10 h-25 w-25" style="color: white;" />
+          </div>
         </div>
       </div>
     </div>
@@ -93,7 +96,7 @@ function navigateToDetail() {
   margin-bottom: 11px;
   width: 100%;
   height: 28px;
-  font-size: 16px;
+  font-size: clamp(16px,20px,20px);
   text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -103,11 +106,11 @@ function navigateToDetail() {
   line-height: 24px;
 }
 
-.gameItemNameMobile {
+.gameItemNamePC {
   margin-top: 8px;
   margin-bottom: 8px;
-  font-size: 22px;
-  line-height: 24px;
+  font-size: 25px;
+
 }
 
 .btnWrapMobile {
@@ -117,5 +120,8 @@ function navigateToDetail() {
 .gameItemBtnMobile {
   height: 40px;
   border-radius: 31px;
+}
+.norem-minFontSize{
+  font-size: clamp(14px,0.2rem,0.2rem);
 }
 </style>
