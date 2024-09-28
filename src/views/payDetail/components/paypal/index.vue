@@ -122,9 +122,15 @@ defineExpose({
 </script>
 
 <template>
-  <Dialog v-model:visible="visible" title="Paypal">
+  <Dialog
+    v-model:visible="visible"
+    title="Paypal"
+  >
     <div class="paypal-container">
-      <div id="paypal-button-container" class="main" />
+      <div
+        id="paypal-button-container"
+        class="main"
+      />
     </div>
   </Dialog>
 </template>

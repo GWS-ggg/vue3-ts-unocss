@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import BannerImage from '../payHub/components/bannerImage/index.vue'
 import OrderDialog from './components/gameOrder/index.vue'
 import OrderPop from './components/gameOrderPop/index.vue'
 import GameLogin from './components/gameLogin/index.vue'
@@ -8,7 +9,8 @@ import PopVue from './components/pop/index.vue'
 import Paypal from './components/paypal/index.vue'
 import Mycard from './components/mycard/index.vue'
 import { filterPaymentMethods, getRebateAmount } from './index'
-import NavBar from '@/components/header/index.vue'
+import HeaderContainer from '@/components/header/index.vue'
+import FooterContainer from '@/components/footer/index.vue'
 import { isPCDevice } from '@/utils/flexible'
 import { Toast, initToast } from '@/utils/toast'
 import { getPayDataApi, initH5PayApi, myCardOrderApi, orderStasuApi, paypalSettleApi } from '@/api'
@@ -89,6 +91,10 @@ const isVisibleLogin = ref(false)
 function onShowLogin() {
   isLogin.value = false
   isVisibleLogin.value = true
+}
+function onLoginOut() {
+  // todo
+  isLogin.value = false
 }
 function onCloseLogin() {
   isVisibleLogin.value = false
@@ -652,74 +658,167 @@ function showSuccessPop() {
     },
   })
 }
+
+// 商品数量
+const productCount = ref(1)
+
+function addProductCount() {
+  productCount.value++
+}
+
+function reduceProductCount() {
+  if (productCount.value > 1) {
+    productCount.value--
+  }
+}
+// interface VoucherPoints {
+//   beforeValue: string
+//   result: string
+//   makeUpPoint: number
+// }
+// 数量变化 价格重新计算
+// const voucherPoints = ref<VoucherPoints>()
+// watch(productCount, () => {
+//   voucherPoints.value = getVoucherPoints(product, currencyCode, getRebateAmount(payLevel, levelMap), baseInfo.appid, productCount)
+// })
 </script>
 
 <template>
-  <div class="scrollbarWidth h-[100vh] w-[100vw] overflow-x-hidden overflow-y-auto bg-[#f4f4f4]">
-    <NavBar />
-    <div class="mt-80" :class="{ imageMarginTop: isPCDevice }">
-      <div class="relative h-auto w-full overflow-hidden">
-        <img src="@/assets/images/home.jpg" alt="Header" class="w-full">
-      </div>
-    </div>
-    <div class="relative mx-auto mt-10 max-w-1200">
+  <div class="scrollbarWidth h-[100vh] w-[100vw] overflow-x-hidden overflow-y-auto bg-[#E0E0E0]">
+    <HeaderContainer />
+    <BannerImage />
+    <div
+      class="relative mx-auto w-750 text-24 -mt-50"
+      lg="w-1200 text-18 -mt-40"
+    >
       <div
-        class="relative mx-15 w-auto f-b flex-col items-start rounded-10 bg-[#ffffff] px-10 pb-10 pt-4 shadow-none -mt-30"
-        md="w-full -mt-40 shadow-md p-15 flex-row justify-between items-center "
-        :class="{ gameIntroPCMargin: isPCDevice }"
+        class="relative mx-auto w-710 flex flex-col items-start rounded-10 bg-[#ffffff] p-10"
+        lg="w-full items-center justify-between flex-row rounded-20"
       >
-        <div class="mt-15 w-full flex items-center" md="w-auto min-w-200">
+        <div
+          class="flex"
+          lg="items-center"
+        >
           <img
             src="@/assets/images/pic1.webp"
             alt=""
-            class="relative h-48 w-48 rounded-12 rounded-20 object-cover"
-            md="w-70 h-70 rounded-20 me-15"
+            class="relative h-80 w-80 rounded-12 rounded-20 object-cover"
+            lg="h-80 w-80"
           >
-          <div class="ml-20">
-            游戏名称
+          <div
+            class="ml-20 mt-10 flex flex-col"
+            lg="mt-0"
+          >
+            <div
+              class="text-24"
+              lg="text-24"
+            >
+              游戏名称
+            </div>
+            <div
+              class="mt-15"
+              lg="text-20"
+            >
+              游戏描述
+            </div>
           </div>
         </div>
-        <div class="min-w-200 f-s rounded-20 bg-[#f4f4f4]" md=" f-e mr-20">
+        <div
+          class="mt-10 w-full rounded-10 bg-[#E0E0E0]"
+          lg="w-auto mt-0"
+        >
           <div v-show="isLogin">
-            <div class="mr-10">
-              UID
+            <div
+              class="mb-10 ml-10 mt-10 f-s"
+              lg="my-0"
+            >
+              <img
+                src="@/assets/icons/Avatar.png"
+                alt=""
+                class="relative h-63 w-63 rounded-12 object-cover"
+                lg="h-63 w-63 my-5"
+              >
+              <div class="my-auto ml-10 flex flex-col">
+                <div
+                  class="mb-15 mr-10 text-24"
+                  lg="text-24"
+                >
+                  UID: {{ uid }}
+                </div>
+                <div>
+                  Server
+                </div>
+              </div>
+              <div
+                class="my-auto ml-10 flex cursor-pointer items-center text-24"
+                @click="onLoginOut"
+              >
+                <div class="color-[#ED6504]">
+                  Log out
+                </div>
+                <div
+                  class="i-iconamoon:arrow-right-2-light h-30 w-30"
+                  style="color: #ED6504;"
+                />
+              </div>
             </div>
-            <div>{{ uid }}</div>
           </div>
 
-          <div class="w-40 cursor-pointer b-s rounded-30 bg-red" @click="onShowLogin">
-            登录
+          <div
+            v-show="!isLogin"
+            class="mb-10 mt-10 f-c flex-col text-24"
+            lg="p-10 my-0"
+          >
+            <div>
+              Log into your game account
+            </div>
+            <div
+              class="mt-10 f-c flex cursor-pointer color-[#ED6504]"
+              @click="onShowLogin"
+            >
+              <div>Log in</div>
+              <div
+                class="i-iconamoon:arrow-right-2-light h-30 w-30"
+                style="color: #ED6504;"
+              />
+            </div>
           </div>
         </div>
       </div>
-      <div class="mb-40 mt-20 bg-[#fff] shadow-md">
-        <div class="h-50 w-full rounded-10 bg-[#fff] ps-12">
-          <p class="pt-10 text-18 leading-25">
-            礼包选择
-          </p>
+      <div class="mb-40 mt-20 rounded-20 bg-[#fff] text-20">
+        <div class="ml-10 pt-10 text-24">
+          礼包选择
         </div>
-        <div class="flex flex-wrap justify-start gap-12 px-15">
+        <div
+          class="flex flex-wrap justify-start gap-15 px-27.5"
+          lg="gap-12 px-32"
+        >
           <div
             v-for="(product, index) in goodsData?.goods"
             :key="index"
-            class="giftMediaWidth relative mb-16 min-h-150 min-w-150 flex flex-row cursor-pointer border rounded-24 text-center shadow-md"
+            class="relative mb-15 h-340 w-340 flex flex-row cursor-pointer border rounded-24 text-center shadow-md"
+            lg="h-275 w-275"
           >
-            <div class="w-full overflow-hidden rounded-25 shadow-lg">
-              <div
-                class="relative h-0 w-full bg-contain bg-center bg-no-repeat pb-[calc((92/164)*100%)]"
-                :style="{ backgroundImage: `url(${product.img})` }"
-              />
-              <div class="mx-5 p-4 text-center">
-                <div class="mb-17 font-semibold">
+            <div
+              class="relative w-full rounded-25 text-26 shadow-lg"
+              lg="text-24"
+            >
+              <img
+                class="absolute left-[50%] top-0 z-0 h-[60%] w-[60%] translate-x-[-50%]"
+                :src="product.img"
+                alt=""
+              >
+              <div class="absolute left-[50%] top-[60%] z-10 w-full f-c flex-col translate-x-[-50%]">
+                <div class="whitespace-nowrap font-semibold">
                   {{ product.title }}
                 </div>
                 <div
-                  class="btnColor h-38 w-full f-c cursor-pointer border rounded-25 text-center text-12 color-[#fff] leading-12"
-                  lg="h-44 text-16  font-600"
+                  class="btnColor mt-30 h-50 w-[80%] f-c cursor-pointer border rounded-25 text-center color-[#fff]"
+                  lg="mt-20"
                   @click="showPayOrder(product)"
                 >
                   {{ getVoucherPoints(product, currencyCode, getRebateAmount(payLevel, levelMap),
-                                      baseInfo.appid).beforeValue
+                                      baseInfo.appid, productCount).beforeValue
                   }}
                 </div>
               </div>
@@ -728,34 +827,62 @@ function showSuccessPop() {
         </div>
       </div>
     </div>
-
+    <FooterContainer />
     <!-- <a-modal v-model:open="dialogOpen" :mask-closable="false" :footer="null" width="750px" @ok="handleOk">
       <template #title>
         <div class="text-center">
           确认支付订单
         </div>
       </template>
-      <OrderDialog />
-    </a-modal> -->
+<OrderDialog />
+</a-modal> -->
   </div>
   <m-dialog v-model="dialogVisible">
-    <OrderDialog :selected-product="activeProduct" :currency-code="currencyCode" :pay-method-list="payMethodList" @on-close-dialog="closeDialog" @checkout="checkout" @change-pay-method="changePayMethod" />
+    <OrderDialog
+      :selected-product="activeProduct"
+      :user-info="userInfo"
+      :product-count="productCount"
+      :currency-code="currencyCode"
+      :pay-method-list="payMethodList"
+      @add-product-count="addProductCount"
+      @reduce-product-count="reduceProductCount"
+      @on-close-dialog="closeDialog"
+      @checkout="checkout"
+      @change-pay-method="changePayMethod"
+    />
   </m-dialog>
-  <m-dialog v-model="isVisibleLogin">
-    <GameLogin v-model:uid="uid" @on-close-login="onCloseLogin" @on-click-login="handleUIDOk" />
+  <m-dialog
+    v-model="isVisibleLogin"
+    custome-class="rounded-20"
+  >
+    <GameLogin
+      v-model:uid="uid"
+      @on-close-login="onCloseLogin"
+      @on-click-login="handleUIDOk"
+    />
   </m-dialog>
   <m-popup v-model="isVisblePopup">
     <OrderPop @on-close-popup="onClosePopup" />
   </m-popup>
   <Paypal
-    ref="payPalRef" :base-info="baseInfo" :user-info="userInfo" @created="handleOrderCreated"
-    @close="handleModalClose" @status-change="handlePaypalStatusChange"
+    ref="payPalRef"
+    :base-info="baseInfo"
+    :user-info="userInfo"
+    @created="handleOrderCreated"
+    @close="handleModalClose"
+    @status-change="handlePaypalStatusChange"
   />
   <Mycard
-    ref="mycardRef" :base-info="baseInfo" :user-info="userInfo" @created="handleOrderCreated"
+    ref="mycardRef"
+    :base-info="baseInfo"
+    :user-info="userInfo"
+    @created="handleOrderCreated"
     @close="handleModalClose"
   />
-  <PopVue :pop="pop" @update:visible="handlePopVisibleUpdate" />
+  <PopVue
+    :pop="pop"
+    @update:visible="handlePopVisibleUpdate"
+  />
 </template>
 
 <style scoped>
@@ -763,35 +890,12 @@ function showSuccessPop() {
   margin-top: 80px;
 }
 
-@media screen and (min-width: 1180px) {
-  .giftMediaWidth {
-    width: calc((100% - 48px) / 5);
-  }
-}
-
-@media screen and (max-width: 1180px) and (min-width: 900px) {
-  .giftMediaWidth {
-    width: calc((100% - 36px) / 4);
-  }
-}
-
-@media screen and (max-width: 900px) and (min-width: 504px) {
-  .giftMediaWidth {
-    width: calc((100% - 24px) / 3);
-  }
-}
-
-@media screen and (max-width: 504px) {
-  .giftMediaWidth {
-    width: calc((100% - 12px) / 2);
-  }
-}
-
 .gameIntroPCMargin {
-   @apply mx-0
+  @apply mx-0
 }
+
 .btnColor {
-  background: linear-gradient(93deg, #fe4046 0%, #f04140 100%) ;
+  background: linear-gradient(93deg, #FFA500 0%, #FF8C00 100%);
 }
 
 .scrollbarWidth {

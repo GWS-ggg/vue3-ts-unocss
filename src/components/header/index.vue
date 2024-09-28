@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { isPCDevice } from '@/utils/flexible'
 import { type LocaleKey, setLocale, t } from '@/language/i18n'
 
@@ -90,30 +90,58 @@ function changeLanguage(language: string) {
 function isLocaleKey(language: string): language is LocaleKey {
   return localeKeys.includes(language as LocaleKey)
 }
+
+const router = useRouter()
+function navigationToHome() {
+  router.push('/gameHome')
+}
 </script>
 
 <template>
-  <div
-    class="fixed left-0 top-0 z-1000 h-80 w-[100vw] bg-[#222c37] text-center p-[0]!"
-  >
-    <div class="flex items-center pl-26 pr-17" :class="{ 'px-0': isPCDevice }">
-      <div v-if="!isPCDevice" class="h-80 f-c" @click="toggleMenu">
+  <div class="fixed left-0 top-0 z-1000 h-80 w-[100vw] bg-[#222c37] text-center p-[0]!">
+    <div
+      class="flex items-center pl-26 pr-17"
+      :class="{ 'px-0': isPCDevice }"
+    >
+      <div
+        v-if="!isPCDevice"
+        class="h-80 f-c"
+        @click="toggleMenu"
+      >
         <!-- <div v-if="!isMenuVisible" class="i-ooui:menu h-24 w-24" style="color: white;" />
         <div v-else class="i-material-symbols:close h-24 w-24" style="color: white;" /> -->
         <div class="relative h-45 w-72">
-          <img class="absolute left-0 h-full w-full" src="@/assets/icons/List.png" alt="">
-          <img class="absolute left-0 h-full w-full" src="@/assets/icons/Back.png" alt="">
+          <img
+            class="absolute left-0 h-full w-full"
+            src="@/assets/icons/List.png"
+            alt=""
+          >
+          <img
+            class="absolute left-0 h-full w-full"
+            src="@/assets/icons/Back.png"
+            alt=""
+          >
         </div>
       </div>
-      <div class="h-52 w-full f-c cursor-pointer" :class="{ 'w-[200px]! ml-34 mt-9 mb-19 ': isPCDevice }">
+      <div
+        class="h-52 w-full f-c cursor-pointer"
+        :class="{ 'w-[200px]! ml-34 mt-9 mb-19 ': isPCDevice }"
+        @click="navigationToHome"
+      >
         <img
-          class="block h-full w-200" src="@/assets/icons/99-logo.png"
+          class="block h-full w-200"
+          src="@/assets/icons/99-logo.png"
           alt=""
         >
       </div>
-      <div v-if="isPCDevice" class="w-full f-c color-[#fff]">
+      <div
+        v-if="isPCDevice"
+        class="w-full f-c color-[#fff]"
+      >
         <router-link
-          v-for="navbaritem in navbarItems" :key="navbaritem.name" :to="navbaritem.path"
+          v-for="navbaritem in navbarItems"
+          :key="navbaritem.name"
+          :to="navbaritem.path"
           class="mx-[1vw] text-25 text-color-[#fff] leading-25 no-underline"
           :class="{ 'text-[#FF6A00]! font-bold': activeNavbarItem === navbaritem.name }"
           @click="setActiveNavbarItem(navbaritem.name)"
@@ -121,34 +149,71 @@ function isLocaleKey(language: string): language is LocaleKey {
           {{ t(navbaritem.name) }}
         </router-link>
       </div>
-      <div v-if="isPCDevice" class="PClanguage mr-27 f-b text-18 color-[#fff]">
+      <div
+        v-if="isPCDevice"
+        class="PClanguage mr-27 f-b text-18 color-[#fff]"
+      >
         <div class="f-c">
           <!-- <div class="w-100 overflow-auto overflow-unset">
             Save to Desktop
           </div>
           <div class="i-mingcute:download-line h-[46px] w-[46px]" style="color: white;" /> -->
-          <img src="@/assets/icons/download.png" alt="">
+          <img
+            src="@/assets/icons/download.png"
+            alt=""
+          >
         </div>
       </div>
-      <div class="mobileLanguage flex cursor-pointer items-center" @click="changeLanguageVisible">
+      <div
+        class="mobileLanguage flex cursor-pointer items-center"
+        @click="changeLanguageVisible"
+      >
         <div class="relative mr-15 whitespace-nowrap text-30 color-[#FFFFFF]">
           {{ selectedLanguageLabel }}
-          <div v-show="isLanguageVisible" class="absolute top-30 w-100 f-c flex-col bg-[#222C37] pb-20 text-30 color-[#fff] -left-20">
-            <div v-for="language in languageOptions" :key="language.value" class="mt-16 px-20" :class="{ 'color-[#FF6A00]': selectedLanguage === language.value }" @click="changeLanguage(language.value)">
+          <div
+            v-show="isLanguageVisible"
+            class="absolute top-30 w-100 f-c flex-col bg-[#222C37] pb-20 text-30 color-[#fff] -left-20"
+          >
+            <div
+              v-for="language in languageOptions"
+              :key="language.value"
+              class="mt-16 px-20"
+              :class="{ 'color-[#FF6A00]': selectedLanguage === language.value }"
+              @click="changeLanguage(language.value)"
+            >
               {{ language.label }}
             </div>
           </div>
         </div>
-        <img v-if="!isPCDevice" src="@/assets/icons/dropDownArrow.png" class="h-30 w-30" alt="">
-        <img v-else src="@/assets/icons/global-icon.png" class="h-38 w-38" alt="">
+        <img
+          v-if="!isPCDevice"
+          src="@/assets/icons/dropDownArrow.png"
+          class="h-30 w-30"
+          alt=""
+        >
+        <img
+          v-else
+          src="@/assets/icons/global-icon.png"
+          class="h-38 w-38"
+          alt=""
+        >
       </div>
     </div>
 
-    <div v-show="isMenuVisible" class="linkMask fixed bottom-0 left-0 right-0 top-0 z-10" @click="closeMenu" />
-    <div v-show="isMenuVisible" class="fixed left-0 top-80 z-1000 h-[100%] w-[62.5vw] bg-[#222C37] text-30 color-[#fff]">
+    <div
+      v-show="isMenuVisible"
+      class="linkMask fixed bottom-0 left-0 right-0 top-0 z-10"
+      @click="closeMenu"
+    />
+    <div
+      v-show="isMenuVisible"
+      class="fixed left-0 top-80 z-1000 h-[100%] w-[62.5vw] bg-[#222C37] text-30 color-[#fff]"
+    >
       <div class="w-full flex flex-col items-start px-26">
         <router-link
-          v-for="navbaritem in navbarItems" :key="navbaritem.name" :to="navbaritem.path"
+          v-for="navbaritem in navbarItems"
+          :key="navbaritem.name"
+          :to="navbaritem.path"
           class="w-full f-s text-color-[#fff] no-underline"
           :class="{ 'text-[#FF6A00]! font-bold': activeNavbarItem === navbaritem.name }"
           @click="setActiveNavbarItem(navbaritem.name)"

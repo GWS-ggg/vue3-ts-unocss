@@ -121,8 +121,9 @@ const mjGiftValue: Record<string, Record<string, number>> = {
     13: 406,
   },
 }
+
 // 获取赠送点券
-export function getVoucherPoints(product: Product, currencyCode: string, rebate: number, appid: string) {
+export function getVoucherPoints(product: Product, currencyCode: string, rebate: number, appid: string, productCount: number) {
   let beforeValue = ''
   let result = ''
   let priceValue = 0
@@ -130,7 +131,7 @@ export function getVoucherPoints(product: Product, currencyCode: string, rebate:
   const rebateValue = 1 + (rebate || 0) / 100
   try {
     if (![mjsgMjAppid, mjsgAppid].includes(appid)) { // 非名将三国的走档位逻辑
-      priceValue = Number(product.price) / 100
+      priceValue = Number(product.price) / 100 * productCount
       const tempResult = Math.floor(priceValue * rebateValue)
       // if (tempResult > priceValue && appid !== ycwgAppid) { // 勇闯王国不显示角标
       //   makeUpPoint = tempResult - priceValue
@@ -140,7 +141,7 @@ export function getVoucherPoints(product: Product, currencyCode: string, rebate:
     }
     else { // 名将三国返利写死
       const usdValue = product.usd
-      priceValue = Number(product.price) / 100
+      priceValue = Number(product.price) / 100 * productCount
       const tempResult = Math.floor(priceValue * 1.15)
       if (tempResult > priceValue) {
         makeUpPoint = mjGiftValue[usdValue][rebate]

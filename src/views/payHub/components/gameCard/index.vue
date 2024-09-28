@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router'
-import { isPCDevice } from '@/utils/flexible'
 
 // 定义 props
 const props = defineProps<{
@@ -20,30 +19,49 @@ function navigateToDetail() {
 
 <template>
   <div
-    class="relative mt-13 min-w-165 w-[calc((100%-10px)/2)] flex flex-col rounded-16 shadow-md lg:w-[calc((100%-48px)/4)] md:w-[calc((100%-24px)/3)]"
-    :class="{ gameCardMobile: isPCDevice }"
+    class="relative mt-23 h-340 w-340 flex flex-col rounded-16 text-24 shadow-md"
+    lg="mt-50 h-275 w-275 text-18"
   >
-    <div class="h-115 overflow-hidden rounded-t-16">
-      <img :src="image" alt="" class="h-120 w-[110%] translate-x-[-5%] translate-y-[-15px] transform object-cover filter-blur-8">
+    <div class="h-[50%] overflow-hidden rounded-t-16">
+      <img
+        :src="image"
+        alt=""
+        class="h-full w-full object-cover filter-blur-9"
+      >
     </div>
-    <div class="gameItemWrap" :class="{ gameItemWrapMobile: isPCDevice }">
-      <div class="text-center -mt-35">
-        <img :src="image" alt="Game Image" class="h-65 w-65 rounded-16" :class="{ gameIconMobile: isPCDevice }">
-        <div class="gameItemName" :class="{ 'gameItemNamePC': isPCDevice, 'norem-minFontSize': !isPCDevice }">
-          {{ title }}
-        </div>
-      </div>
-      <div class="flex flex-wrap" :class="{ btnWrapMobile: isPCDevice }">
-        <div
-          class="relative mt-15 h-46 w-full f-b flex-1 cursor-pointer rounded-31 bg-[#ED6504] px-10 py-0 text-center color-[#fff] leading-14 opacity-100"
-          :class="{ gameItemBtnMobile: isPCDevice }"
-          @click="navigateToDetail"
+    <div class="relative h-[60%] w-full flex flex-col rounded-16 px-15 pb-15">
+      <div
+        class="text-center -mt-34"
+        lg="-mt-31"
+      >
+        <img
+          :src="image"
+          alt="Game Image"
+          class="h-68 w-68 rounded-16"
+          lg="h-62 w-62"
         >
-          <div class="relative w-full f-c flex flex-1 text-center text-25 leading-14">
-            <div>立即进入</div>
-            <div class="i-solar:alt-arrow-right-line-duotone absolute right-10 h-25 w-25" style="color: white;" />
-          </div>
+      </div>
+      <div
+        class="mt-30 whitespace-nowrap text-center font-bold"
+        lg="mt-20"
+      >
+        {{ title }}
+      </div>
+      <div
+        class="relative mt-30 w-full f-c cursor-pointer rounded-54 bg-[#ED6504] px-10 text-center color-[#fff]"
+        lg="mt-20"
+        @click="navigateToDetail"
+      >
+        <div
+          class="h-54 f-c"
+          lg="h-54"
+        >
+          立即进入
         </div>
+        <div
+          class="i-solar:alt-arrow-right-line-duotone absolute right-10 h-25 w-25"
+          style="color: white;"
+        />
       </div>
     </div>
   </div>

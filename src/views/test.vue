@@ -7,7 +7,10 @@ function open4() {
 </script>
 
 <template>
-  <el-button :plain="true" @click="open4">
+  <el-button
+    :plain="true"
+    @click="open4"
+  >
     Error
   </el-button>
 </template>

@@ -46,42 +46,85 @@ onMounted(() => {
 
 <template>
   <div class="default">
-    <div class="wrapper" lg="wrapperPC">
+    <div
+      class="wrapper"
+      lg="wrapperPC"
+    >
       <HeaderContainer />
       <section class="kv part">
         <div class="kv_slogan">
           <div>
-            <p class="kv_slogan1" data-lilac="" data-lilac-key-="home1">
+            <p
+              class="kv_slogan1"
+              data-lilac=""
+              data-lilac-key-="home1"
+            >
               Heroes Unite. Battle for a Fantasy Realm!
             </p>
           </div>
           <div>
-            <p class="kv_slogan2" data-lilac="" data-lilac-key-="home33">
+            <p
+              class="kv_slogan2"
+              data-lilac=""
+              data-lilac-key-="home33"
+            >
               An MMO Fantasy Conquest Game
             </p>
-            <p class="kv_slogan2" data-lilac="" data-lilac-key-="home34">
+            <p
+              class="kv_slogan2"
+              data-lilac=""
+              data-lilac-key-="home34"
+            >
               BY THE ROK TEAM
             </p>
           </div>
         </div>
         <div class="m_kv_desc">
-          <img src="https://onestop.63cj.com/locRes?id=m_slogan&amp;lang=default&amp;name=samo_2" alt="">
+          <img
+            src="https://onestop.63cj.com/locRes?id=m_slogan&amp;lang=default&amp;name=samo_2"
+            alt=""
+          >
         </div>
         <div class="kv_down">
           <div class="pluto-mall">
             <div class="btn-pluto-title" />
-            <a href="https://store.farlightgames.com/cod?shortlink=codg.int.web.os.ce.def" target="_blank">
-              <img class="btn-pluto-mall" src="/src/assets/images/detail/kv_plutomall.png" alt="">
+            <a
+              href="https://store.farlightgames.com/cod?shortlink=codg.int.web.os.ce.def"
+              target="_blank"
+            >
+              <img
+                class="btn-pluto-mall"
+                src="/src/assets/images/detail/kv_plutomall.png"
+                alt=""
+              >
             </a>
           </div>
-          <a target="_blank" href="https://apps.apple.com/us/app/call-of-dragons/id1605558677">
-            <img src="https://onestop.63cj.com/locRes?id=apple&amp;lang=default&amp;name=samo_2" alt="">
+          <a
+            target="_blank"
+            href="https://apps.apple.com/us/app/call-of-dragons/id1605558677"
+          >
+            <img
+              src="https://onestop.63cj.com/locRes?id=apple&amp;lang=default&amp;name=samo_2"
+              alt=""
+            >
           </a>
-          <a target="_blank" href="https://play.google.com/store/apps/details?id=com.farlightgames.samo.gp">
-            <img src="https://onestop.63cj.com/locRes?id=google&amp;lang=default&amp;name=samo_2" alt="">
+          <a
+            target="_blank"
+            href="https://play.google.com/store/apps/details?id=com.farlightgames.samo.gp"
+          >
+            <img
+              src="https://onestop.63cj.com/locRes?id=google&amp;lang=default&amp;name=samo_2"
+              alt=""
+            >
           </a>
-          <a target="_blank" href="https://play.google.com/store/apps/details?id=com.farlightgames.samo.gp">
-            <img src="@/assets/images/detail/apk.png" alt="">
+          <a
+            target="_blank"
+            href="https://play.google.com/store/apps/details?id=com.farlightgames.samo.gp"
+          >
+            <img
+              src="@/assets/images/detail/apk.png"
+              alt=""
+            >
           </a>
         </div>
       </section>
@@ -90,40 +133,63 @@ onMounted(() => {
           <i class="bottom_l fadeInLeft ani" />
           <div class="link_li">
             <a
-              class="fblink" target="_blank" href="https://www.facebook.com/callofdragons"
+              class="fblink"
+              target="_blank"
+              href="https://www.facebook.com/callofdragons"
               onclick="gtag('event', 'facebook');"
             />
             <a
-              class="dclink" target="_blank" href="https://discord.gg/Pub3fg535h"
+              class="dclink"
+              target="_blank"
+              href="https://discord.gg/Pub3fg535h"
               onclick="gtag('event', 'discord');"
             />
             <a
-              class="twlink" target="_blank" href="https://twitter.com/callofdragons"
+              class="twlink"
+              target="_blank"
+              href="https://twitter.com/callofdragons"
               onclick="gtag('event', 'twitter');"
             />
             <a
-              class="ytlink" target="_blank" href="https://www.youtube.com/channel/UCMTqr8lzoTFO_NtPURyPThw"
+              class="ytlink"
+              target="_blank"
+              href="https://www.youtube.com/channel/UCMTqr8lzoTFO_NtPURyPThw"
               onclick="gtag('event', 'youtube');"
             />
             <a
-              class="rdlink" target="_blank" href="https://www.reddit.com/r/callofdragons/"
+              class="rdlink"
+              target="_blank"
+              href="https://www.reddit.com/r/callofdragons/"
               onclick="gtag('event', 'Reddit');"
             />
             <a
-              class="inslink" target="_blank" href="https://www.instagram.com/callofdragonsofficial/"
+              class="inslink"
+              target="_blank"
+              href="https://www.instagram.com/callofdragonsofficial/"
               onclick="gtag('event', 'Instagram');"
             />
             <a
-              class="ttlink" target="_blank" href="https://www.tiktok.com/@callofdragonsgame"
+              class="ttlink"
+              target="_blank"
+              href="https://www.tiktok.com/@callofdragonsgame"
               onclick="gtag('event', 'tiktok');"
             />
-            <a target="_blank" href="https://vk.com/callofdragons" />
+            <a
+              target="_blank"
+              href="https://vk.com/callofdragons"
+            />
           </div>
           <i class="ani bottom_r fadeInRight" />
         </div>
       </section>
-      <div w-full class="bg-[#222C37]">
-        <img src="@/assets/images/detail/star.png" alt="">
+      <div
+        w-full
+        class="bg-[#222C37]"
+      >
+        <img
+          src="@/assets/images/detail/star.png"
+          alt=""
+        >
       </div>
     </div>
   </div>

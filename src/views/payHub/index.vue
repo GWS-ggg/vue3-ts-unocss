@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import GameCard from './components/gameCard/index.vue'
+import BannerImage from './components/bannerImage/index.vue'
 import HeaderContainer from '@/components/header/index.vue'
 import { isPCDevice } from '@/utils/flexible'
 import FooterContainer from '@/components/footer/index.vue'
@@ -22,27 +23,29 @@ watchEffect(() => {
 <template>
   <div class="scrollbarWidth box-border h-[100vh] w-[100vw] overflow-x-hidden overflow-y-auto bg-[#f4f4f4]">
     <HeaderContainer />
-    <div class="mt-80">
-      <div class="relative h-auto w-full overflow-hidden object-cover">
-        <img v-if="!isPCDevice" src="@/assets/images/payHub/store_banner.png" alt="Header" class="w-full">
-        <img v-if="isPCDevice" src="@/assets/images/payHub/pc_banner.png" alt="Header" class="w-full">
-        <img v-if="isPCDevice" class="absolute left-183 top-65 h-106 w-402" src="@/assets/icons/99-logo.png" alt="">
-        <div v-if="isPCDevice" class="absolute left-183 top-216 text-50 color-[#ED6504]">
-          Secure and convenient
-        </div>
-      </div>
-      <div class="relative mx-auto my-0 max-w-1460 flex bg-[#f5f5f5] p-0">
+    <BannerImage />
+    <div
+      class="relative mx-auto my-0 w-750 flex bg-[#f5f5f5] p-0"
+      lg="w-1200"
+    >
+      <div
+        class="mb-40 w-full flex flex-col justify-start rounded-20 bg-[#fff] -mt-20"
+        lg="-mt-36"
+      >
         <div
-          class="mb-40 min-h-270 min-w-375 w-full flex flex-col justify-start rounded-20 bg-[#fff] px-15 -mt-20"
-          xl=" px-30  ms-auto me-auto   "
-          :class="{ gameListContainerMobile: isPCDevice }"
+          class="mx-auto w-full flex flex-wrap justify-start gap-15 px-27.5"
+          lg="gap-12 px-32 "
         >
-          <div class="w-full flex flex-wrap justify-start gap-10" lg="gap-16">
-            <GameCard v-for="game in games" :key="game.title" :title="game.title" :image="game.image" />
-          </div>
+          <GameCard
+            v-for="game in games"
+            :key="game.title"
+            :title="game.title"
+            :image="game.image"
+          />
         </div>
       </div>
     </div>
+
     <FooterContainer />
   </div>
 </template>

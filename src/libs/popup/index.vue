@@ -6,10 +6,16 @@ const isVisble = defineModel({ required: true, type: Boolean })
   <div>
     <teleport to="body">
       <transition name="mask">
-        <div v-if="isVisble" class="fixed left-0 top-0 z-40 h-screen w-screen bg-zinc-700/80" />
+        <div
+          v-if="isVisble"
+          class="fixed left-0 top-0 z-40 h-screen w-screen bg-zinc-700/80"
+        />
       </transition>
       <transition name="popup">
-        <div v-if="isVisble" class="fixed bottom-0 z-50 w-screen overflow-hidden rounded-t-24 bg-white">
+        <div
+          v-if="isVisble"
+          class="fixed bottom-0 z-50 w-screen overflow-hidden rounded-t-24 bg-white"
+        >
           <slot />
         </div>
       </transition>

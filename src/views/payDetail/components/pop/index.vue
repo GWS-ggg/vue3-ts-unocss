@@ -29,26 +29,44 @@ function handleClose() {
 </script>
 
 <template>
-  <div v-if="pop.visible" class="pop-container">
+  <div
+    v-if="pop.visible"
+    class="pop-container"
+  >
     <div class="pop-main">
-      <div v-if="pop.closeable" class="close-btn" @click="handleClose" />
+      <div
+        v-if="pop.closeable"
+        class="close-btn"
+        @click="handleClose"
+      />
       <div class="pop-icon">
-        <img v-if="pop.type === 'success'" src="/img/success-icon.png">
-        <img v-if="pop.type === 'error'" src="/img/error-icon.png">
-        <img v-if="pop.type === 'failed'" src="/img/failed-icon.png">
+        <img
+          v-if="pop.type === 'success'"
+          src="/img/success-icon.png"
+        >
+        <img
+          v-if="pop.type === 'error'"
+          src="/img/error-icon.png"
+        >
+        <img
+          v-if="pop.type === 'failed'"
+          src="/img/failed-icon.png"
+        >
       </div>
       <div class="pop-content">
         {{ pop.content }}
       </div>
       <div class="btns">
         <div
-          v-if="pop.defaultBtn" class="button btn btn-default"
+          v-if="pop.defaultBtn"
+          class="button btn btn-default"
           @click="() => pop.defaultBtn?.onClick && pop.defaultBtn.onClick()"
         >
           {{ pop.defaultBtn.text }}
         </div>
         <div
-          v-if="pop.primaryBtn" class="btn button btn-primary"
+          v-if="pop.primaryBtn"
+          class="btn button btn-primary"
           @click="() => pop.primaryBtn?.onClick && pop.primaryBtn.onClick()"
         >
           {{ pop.primaryBtn.text }}

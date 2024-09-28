@@ -128,21 +128,34 @@ defineExpose({
 </script>
 
 <template>
-  <Dialog v-model:visible="visible" title="Mycard">
+  <Dialog
+    v-model:visible="visible"
+    title="Mycard"
+  >
     <div class="mycard-container">
       <div class="currency-selcet">
         <div class="radio-list">
-          <div class="radio-item" :class="{ 'active-item': currency === 'TWD' }" @click="changeCurrency('TWD')">
+          <div
+            class="radio-item"
+            :class="{ 'active-item': currency === 'TWD' }"
+            @click="changeCurrency('TWD')"
+          >
             TWD
           </div>
-          <div class="radio-item" :class="{ 'active-item': currency === 'HKD' }" @click="changeCurrency('HKD')">
+          <div
+            class="radio-item"
+            :class="{ 'active-item': currency === 'HKD' }"
+            @click="changeCurrency('HKD')"
+          >
             HKD
           </div>
         </div>
       </div>
       <div class="method-list">
         <div
-          v-for=" typeItem in mycardTypeList" :key="typeItem.PaymentType" class="method-item"
+          v-for=" typeItem in mycardTypeList"
+          :key="typeItem.PaymentType"
+          class="method-item"
           :class="{ 'active-method-item': payMethod?.PaymentType === typeItem.PaymentType }"
           @click="chageMethod(typeItem)"
         >
@@ -153,12 +166,18 @@ defineExpose({
             {{ typeItem.PaymentTypeDesc }}
           </div>
         </div>
-        <div v-if="!mycardTypeList.length" class="empty-tip">
+        <div
+          v-if="!mycardTypeList.length"
+          class="empty-tip"
+        >
           暫無可用支付方式
         </div>
       </div>
       <div class="confirm-btn-wrap">
-        <div class="button confirm-button" @click="order">
+        <div
+          class="button confirm-button"
+          @click="order"
+        >
           繼續
         </div>
       </div>

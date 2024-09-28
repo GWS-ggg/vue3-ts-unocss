@@ -34,6 +34,9 @@ const props = defineProps({
     // 关闭按钮事件
     type: Function,
   },
+  customeClass: {
+    type: String,
+  },
 })
 defineEmits(['update:modelValue'])
 // const DURATION = '0.5s' // 关闭事件
@@ -93,17 +96,24 @@ watch(() => props.modelValue, (newValue) => {
   <div>
     <!-- 遮罩层 -->
     <transition name="fade">
-      <div v-if="modelValue" class="fixed left-0 top-0 z-50 h-screen w-full bg-zinc-900/80" />
+      <div
+        v-if="modelValue"
+        class="fixed left-0 top-0 z-50 h-screen w-full bg-zinc-900/80"
+      />
     </transition>
     <!-- 内容 -->
     <transition name="up">
-      <div v-if="modelValue" class="fixed left-1/2 top-[10%] z-50 max-w-[80%] min-w-[256px] translate-x-[-50%] rounded bg-white p-1.5 dark:bg-zinc-800">
+      <div
+        v-if="modelValue"
+        class="fixed left-1/2 top-[50%] z-50 min-w-[256px] translate-x-[-50%] translate-y-[-50%] rounded bg-white p-1.5 dark:bg-zinc-800"
+        :class="customeClass"
+      >
         <!-- title标题 -->
         <div class="mb-1 text-sm text-zinc-800 font-bold dark:text-zinc-200">
           {{ title }}
         </div>
         <!-- content内容 -->
-        <div class="text-sm text-zinc-700 dark:text-zinc-300">
+        <div class="text-zinc-700 dark:text-zinc-300">
           <slot />
         </div>
       </div>

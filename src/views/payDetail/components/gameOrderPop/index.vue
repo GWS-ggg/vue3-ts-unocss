@@ -59,33 +59,64 @@ function selectMethod(id: number) {
 </script>
 
 <template>
-  <div class="relative max-h-[90vh] overflow-hidden rounded-t-24 bg-[#f4f4f4]">
-    <svg class="absolute left-15 top-13 z-10 h-24 w-24" fill="none" xmlns="http://www.w3.org/2000/svg" @click="handleClose">
-      <circle opacity="0.08" cx="12" cy="12" r="12" fill="#333" />
-      <g stroke="#666" stroke-width="2" stroke-linecap="round">
+  <div class="relative max-h-[90vh] overflow-hidden rounded-t-24 bg-[#f4f4f4] text-18">
+    <svg
+      class="absolute left-15 top-13 z-10 h-24 w-24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      @click="handleClose"
+    >
+      <circle
+        opacity="0.08"
+        cx="12"
+        cy="12"
+        r="12"
+        fill="#333"
+      />
+      <g
+        stroke="#666"
+        stroke-width="2"
+        stroke-linecap="round"
+      >
         <path d="M6.977 12.04h10.5M9.375 8.25l-2.788 3.253a1 1 0 0 0 .033 1.339l2.755 2.908" />
       </g>
     </svg>
-    <svg fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute right-15 top-13 z-10 h-24 w-24" @click="handleClose">
-      <circle opacity="0.08" cx="12" cy="12" r="12" fill="#333" />
-      <g stroke="#666" stroke-width="2" stroke-linecap="round"><path d="m8.691 15.531 7.071-7.07M8.691 8.469l7.071 7.07" /></g>
+    <svg
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="absolute right-15 top-13 z-10 h-24 w-24"
+      @click="handleClose"
+    >
+      <circle
+        opacity="0.08"
+        cx="12"
+        cy="12"
+        r="12"
+        fill="#333"
+      />
+      <g
+        stroke="#666"
+        stroke-width="2"
+        stroke-linecap="round"
+      ><path d="m8.691 15.531 7.071-7.07M8.691 8.469l7.071 7.07" /></g>
     </svg>
     <div class="relative h-45 w-full f-c bg-[#fff] px-15 text-18">
       确认支付订单
     </div>
     <div class="max-h-[80vh] min-h-[50vh] overflow-auto bg-[#fff] px-15 pb-150 pt-10">
-      <div class="roleInfo h-44 w-full flex rounded-10 bg-[#f0f0f0] py-6 pl-7 pr-10">
-        <div class="w-full flex">
-          <div class="svgImg block h-32 w-32 flex-basis-32 overflow-hidden rounded-[50%] bg-cover bg-no-repeat">
-            <img
-              class="h-full w-full"
-              src="https://imv2-gl.lilithgame.com/afk2/avatar/spui_avatarhead_1.png"
-              draggable="false"
-              style="object-fit: cover; display: block"
-            >
+      <div class="w-full flex rounded-10 bg-[#E0E0E0] p-10">
+        <img
+          src="@/assets/icons/Avatar.png"
+          alt=""
+          class="relative h-63 w-63 rounded-12 object-cover"
+          lg="h-63 w-63 my-5"
+        >
+        <div class="my-auto ml-10 flex flex-col text-24">
+          <div class="mb-10 mr-10">
+            UID: 1531351
           </div>
-          <div class="uidInfo w-full f-c">
-            uidInfo
+          <div>
+            Server
           </div>
         </div>
       </div>
@@ -119,21 +150,25 @@ function selectMethod(id: number) {
           v-for="method in payMethods"
           :key="method.id"
           class="payList mb-10 h-40 f-c cursor-pointer rounded-8"
-          :class="selectedMethod === method.id ? 'border border-solid border-[#d32f2f] bg-[#fff8f8]' : 'b-s bg-[#fff]'"
+          :class="selectedMethod === method.id ? 'border border-solid border-[#ED6504] bg-[#fff8f8]' : 'b-s bg-[#fff]'"
           @click="selectMethod(method.id)"
         >
-          <img :src="method.logo" :alt="method.description" class="max-h-30 max-w-[40%]">
+          <img
+            :src="method.logo"
+            :alt="method.description"
+            class="max-h-30 max-w-[40%]"
+          >
         </div>
       </div>
       <div class="confirmBtn shadow-custom absolute bottom-0 left-0 min-h-84 w-full rounded-t-12 bg-[#fff] p-15">
         <div class="f-b">
           <div class="f-c">
             <p>合计：</p>
-            <div class="text-18 color-red-6 font-bold">
+            <div class="text-18 color-[#ED6504] font-bold">
               ￥ 6.00
             </div>
           </div>
-          <div class="mr-10 h-44 w-150 f-c cursor-pointer rounded-25 bg-[#f54042] text-18 color-[#fff]">
+          <div class="mr-10 h-44 w-150 f-c cursor-pointer rounded-25 bg-[#ED6504] text-18 color-[#fff]">
             立即支付
           </div>
         </div>

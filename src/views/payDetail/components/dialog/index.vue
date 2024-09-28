@@ -22,9 +22,16 @@ function handleClose() {
 </script>
 
 <template>
-  <div v-if="visibleComputed" class="pop-container">
+  <div
+    v-if="visibleComputed"
+    class="pop-container"
+  >
     <div class="pop-main">
-      <div v-if="closeable" class="close-btn" @click="handleClose" />
+      <div
+        v-if="closeable"
+        class="close-btn"
+        @click="handleClose"
+      />
       <slot />
     </div>
   </div>

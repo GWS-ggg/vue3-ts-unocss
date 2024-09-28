@@ -116,7 +116,10 @@ function navigatieToGameDetail() {
 <template>
   <div class="h-[100%] w-[100vw]">
     <HeaderContainer />
-    <el-main class="mt-80 w-full p-[0]!" :class="{ 'mt-60 ': isPCDevice }">
+    <el-main
+      class="mt-80 w-full p-[0]!"
+      :class="{ 'mt-60 ': isPCDevice }"
+    >
       <div class="bannerTest relative bg-[#000] color-[#fff]">
         <Swiper
           :navigation="true"
@@ -128,18 +131,28 @@ function navigatieToGameDetail() {
         >
           <SwiperSlide
             v-for="item in games"
-            v-slot="{ isActive }" :key="item.title" class="relative w-750 cursor-pointer"
+            v-slot="{ isActive }"
+            :key="item.title"
+            class="relative w-750 cursor-pointer"
             :style="{ height: isPCDevice ? '540px' : '827px' } "
           >
             <div :class="{ 'absolute left-0 top-0 w-full': isPCDevice }">
               <img
-                :src="isPCDevice ? item.bgImagePC : item.bgImageMobile" alt=""
-                class="h-61.33vw w-full object-contain" :class="{ 'h-auto': isPCDevice, 'bannrImgAnimation': isActive && isPCDevice }"
+                :src="isPCDevice ? item.bgImagePC : item.bgImageMobile"
+                alt=""
+                class="h-61.33vw w-full object-contain"
+                :class="{ 'h-auto': isPCDevice, 'bannrImgAnimation': isActive && isPCDevice }"
               >
             </div>
 
-            <div v-if="!isPCDevice" class="mt-20 text-center">
-              <div class="h-48 text-48 leading-48" @click="testClick">
+            <div
+              v-if="!isPCDevice"
+              class="mt-20 text-center"
+            >
+              <div
+                class="h-48 text-48 leading-48"
+                @click="testClick"
+              >
                 {{ item.title }}
               </div>
 
@@ -147,17 +160,33 @@ function navigatieToGameDetail() {
                 了解详情
               </div>
             </div>
-            <div v-if="isPCDevice" class="relative m-auto h-[100%] max-w-1560 pl-100 text-left">
-              <img :src="item.titleImage" alt="" class="mb-40.5 mt-58 h-136.5" :class="{ textImgAnimation: isActive }" @click="testClick">
+            <div
+              v-if="isPCDevice"
+              class="relative m-auto h-[100%] max-w-1560 pl-100 text-left"
+            >
+              <img
+                :src="item.titleImage"
+                alt=""
+                class="mb-40.5 mt-58 h-136.5"
+                :class="{ textImgAnimation: isActive }"
+                @click="testClick"
+              >
               <div class="absolute bottom-80 left-100">
-                <div class="h-63 text-50 font-450 leading-63 text-shadow" :class="{ textImgAnimation: isActive }">
+                <div
+                  class="h-63 text-50 font-450 leading-63 text-shadow"
+                  :class="{ textImgAnimation: isActive }"
+                >
                   {{ item.title }}
                 </div>
-                <div class="h-63 text-50 font-450 leading-63 text-shadow" :class="{ textImgAnimation: isActive }">
+                <div
+                  class="h-63 text-50 font-450 leading-63 text-shadow"
+                  :class="{ textImgAnimation: isActive }"
+                >
                   {{ item.description }}
                 </div>
                 <div
-                  class="mt-28 h-46 w-176 f-c cursor-pointer border border-[#d32f2f] border-solid border-solid bg-[#d32f2f] text-18 color-[#fff] op-[.9999]" :class="{ textImgAnimation: isActive }"
+                  class="mt-28 h-46 w-176 f-c cursor-pointer border border-[#d32f2f] border-solid border-solid bg-[#d32f2f] text-18 color-[#fff] op-[.9999]"
+                  :class="{ textImgAnimation: isActive }"
                 >
                   了解详情
                 </div>
@@ -165,14 +194,23 @@ function navigatieToGameDetail() {
             </div>
           </SwiperSlide>
           <!-- 自定义导航箭头 -->
-          <div class="absolute left-0 top-[45%] z-10 h-60 w-24 f-c cursor-pointer bg-[rgba(0,0,0,.3)] color-[#d32f2f]" :class="{ 'left-20 h-80 w-40': isPCDevice }">
-            <div class="i-iconamoon:arrow-left-2-thin h-36 w-36" @click="goToPrevBannerSlide" />
+          <div
+            class="absolute left-0 top-[45%] z-10 h-60 w-24 f-c cursor-pointer bg-[rgba(0,0,0,.3)] color-[#d32f2f]"
+            :class="{ 'left-20 h-80 w-40': isPCDevice }"
+          >
+            <div
+              class="i-iconamoon:arrow-left-2-thin h-36 w-36"
+              @click="goToPrevBannerSlide"
+            />
           </div>
           <div
             class="absolute right-0 top-[45%] z-10 h-60 w-24 f-c cursor-pointer bg-[rgba(0,0,0,.3)] color-[#d32f2f]"
             :class="{ 'right-20 h-80 w-40': isPCDevice }"
           >
-            <div class="i-iconamoon:arrow-right-2-thin h-36 w-36" @click="goToNextBannerSlide" />
+            <div
+              class="i-iconamoon:arrow-right-2-thin h-36 w-36"
+              @click="goToNextBannerSlide"
+            />
           </div>
         </Swiper>
       </div>
@@ -180,18 +218,37 @@ function navigatieToGameDetail() {
         class="mobileGameContainer mt-45"
         :class="{ 'w-full text-center m-auto relative px-40 min-w-1440 max-w-1560 ': isPCDevice }"
       >
-        <div class="gameTitle mb-15 ml-55 h-40 f-s" :class="{ ' w-full max-w-1560 pl-[0]! ': isPCDevice }">
+        <div
+          class="gameTitle mb-15 ml-55 h-40 f-s"
+          :class="{ ' w-full max-w-1560 pl-[0]! ': isPCDevice }"
+        >
           <div class="text-40">
             <span class="color-[#222C37]">{{ t('message.games') }}</span>
           </div>
-          <div v-if="isPCDevice" class="ml-12 h-full flex cursor-pointer items-end text-25 color-[#ed6504]" @click="navigatieToGameList">
+          <div
+            v-if="isPCDevice"
+            class="ml-12 h-full flex cursor-pointer items-end text-25 color-[#ed6504]"
+            @click="navigatieToGameList"
+          >
             <span>{{ t('message.viewsAll') }}</span>
             <div class="mb-4 ml-4 h-20 w-20">
-              <img src="@/assets/icons/rightArrow.png" class="h-20 w-20" alt="">
+              <img
+                src="@/assets/icons/rightArrow.png"
+                class="h-20 w-20"
+                alt=""
+              >
             </div>
           </div>
-          <div v-if="!isPCDevice" class="ml-16 h-full w-30 f-c" @click="navigatieToGameList">
-            <img src="@/assets/icons/rightArrow.png" class="h-25 w-25" alt="">
+          <div
+            v-if="!isPCDevice"
+            class="ml-16 h-full w-30 f-c"
+            @click="navigatieToGameList"
+          >
+            <img
+              src="@/assets/icons/rightArrow.png"
+              class="h-25 w-25"
+              alt=""
+            >
           </div>
           <!-- 跳转到游戏列表 -->
         </div>
@@ -200,26 +257,48 @@ function navigatieToGameDetail() {
           class="element-with-scroll mobileGameList ml-35 w-full overflow-x-auto overflow-y-hidden whitespace-nowrap pb-30"
         >
           <div
-            v-for="gameCardItem in gameCardList" :key="gameCardItem.title" class="relative ml-20 mr-82 inline-block h-625 w-375 cursor-pointer"
+            v-for="gameCardItem in gameCardList"
+            :key="gameCardItem.title"
+            class="relative ml-20 mr-82 inline-block h-625 w-375 cursor-pointer"
             @click="navigatieToGameDetail"
           >
             <div class="relative h-full w-full">
-              <img :src="gameCardItem.bgImage" class="h-full w-full" alt="">
-              <div
-                class="mobileGameCardDesc absolute bottom-0 left-0 z-0 h-75 w-full text-center text-30 color-[#fff] leading-30"
+              <img
+                :src="gameCardItem.bgImage"
+                class="h-full w-full"
+                alt=""
               >
+              <div class="mobileGameCardDesc absolute bottom-0 left-0 z-0 h-75 w-full text-center text-30 color-[#fff] leading-30">
                 {{ gameCardItem.title }}
               </div>
             </div>
           </div>
         </div>
-        <div v-if="isPCDevice" class="relative">
+        <div
+          v-if="isPCDevice"
+          class="relative"
+        >
           <div class="relative mb-100 w-full">
-            <Swiper :slides-per-view="4" :space-between="20" @swiper="onSwiper" @slide-change="onSlideChange">
-              <SwiperSlide v-for="(slide, index) in gameCardList" :key="index">
-                <div class="gameCardParentHover relative w-full cursor-pointer pb-48" @click="navigatieToGameDetail">
+            <Swiper
+              :slides-per-view="4"
+              :space-between="20"
+              @swiper="onSwiper"
+              @slide-change="onSlideChange"
+            >
+              <SwiperSlide
+                v-for="(slide, index) in gameCardList"
+                :key="index"
+              >
+                <div
+                  class="gameCardParentHover relative w-full cursor-pointer pb-48"
+                  @click="navigatieToGameDetail"
+                >
                   <div class="relative h-454 overflow-hidden">
-                    <img :src="slide.bgImage" :alt="slide.title" class="block w-full">
+                    <img
+                      :src="slide.bgImage"
+                      :alt="slide.title"
+                      class="block w-full"
+                    >
                     <div class="gameCardPCDesc absolute bottom-0 z-0 h-228 w-full f-e flex-col color-[#fff]">
                       <div class="gameTitlePCShadow mb-45 overflow-hidden text-ellipsis whitespace-nowrap text-24">
                         {{ slide.title }}
@@ -234,18 +313,28 @@ function navigatieToGameDetail() {
             </Swiper>
             <div
               class="absolute top-[40%] z-100 f-c cursor-pointer -left-60"
-              :class="{ 'op-0': isFirstSlide }" @click="goToPrevSlide"
+              :class="{ 'op-0': isFirstSlide }"
+              @click="goToPrevSlide"
             >
               <div>
-                <img class="h-60 w-80" src="@/assets/icons/left.png" alt="">
+                <img
+                  class="h-60 w-80"
+                  src="@/assets/icons/left.png"
+                  alt=""
+                >
               </div>
             </div>
             <div
               class="absolute top-[40%] z-100 f-c cursor-pointer -right-60"
-              :class="{ 'op-0': isLastSlide }" @click="goToNextSlide"
+              :class="{ 'op-0': isLastSlide }"
+              @click="goToNextSlide"
             >
               <div>
-                <img class="h-60 w-80" src="@/assets/icons/right.png" alt="">
+                <img
+                  class="h-60 w-80"
+                  src="@/assets/icons/right.png"
+                  alt=""
+                >
               </div>
             </div>
           </div>
