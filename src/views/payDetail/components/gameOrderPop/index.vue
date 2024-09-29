@@ -1,110 +1,123 @@
 <script setup lang="ts">
-interface PayMethod {
-  id: number
-  name: string
-  description: string
-  logo: string
+import type { PaymethodType } from '@/types/index'
+// interface PayMethod {
+//   id: number
+//   name: string
+//   description: string
+//   logo: string
+// }
+// interface Props {
+//   selectedProduct: Product | null
+//   payMethodList: PaymethodType[]
+//   currencyCode: string
+//   userInfo?: UserInfo
+//   productCount: number
+//   payLevel: number
+//   levelMap: Record<string, number>
+//   baseInfo: H5PayBaseInfo
+// }
+// const props = withDefaults(defineProps<Props>(), {
+//   selectedProduct: null,
+//   currencyCode: '',
+//   productCount: 1,
+// })
+const emit = defineEmits(['onClosePopup', 'checkout', 'changePayMethod', 'addProductCount', 'reduceProductCount'])
+
+const selectedMethod = ref<PaymethodType | null>(null)
+
+function selectMethod(method: PaymethodType) {
+  selectedMethod.value = method
+  emit('changePayMethod', method)
 }
 
-const emit = defineEmits(['onClosePopup'])
+// const priceStr = computed(() => {
+//   if (!props.selectedProduct)
+//     return ''
+//   return getVoucherPoints(props.selectedProduct, props.currencyCode, getRebateAmount(props.payLevel, props.levelMap), props.baseInfo.appid, props.productCount).beforeValue
+// })
+
+// function checkout() {
+//   emit('checkout')
+// }
+
+// function addProductCount() {
+//   emit('addProductCount')
+// }
+// function reduceProductCount() {
+//   emit('reduceProductCount')
+// }
+
+// interface PayMethod {
+//   id: number
+//   name: string
+//   description: string
+//   logo: string
+// }
+
 function handleClose() {
   emit('onClosePopup')
 }
 
-const selectedMethod = ref<number | null>(null)
+// const selectedMethod = ref<number | null>(null)
 
-const payMethods: PayMethod[] = [
-  {
-    id: 1,
-    name: '支付宝',
-    description: 'Alipay',
-    logo: '/src/assets/icons/alipay-log.png',
-  },
-  {
-    id: 2,
-    name: '微信支付',
-    description: 'WeChat Pay',
-    logo: '/src/assets/icons/wechat-pay-logo.png',
-  },
-  {
-    id: 3,
-    name: '微信支付',
-    description: 'WeChat Pay',
-    logo: '/src/assets/icons/wechat-pay-logo.png',
-  },
-  {
-    id: 4,
-    name: '微信支付',
-    description: 'WeChat Pay',
-    logo: '/src/assets/icons/wechat-pay-logo.png',
-  },
-  {
-    id: 5,
-    name: '微信支付',
-    description: 'WeChat Pay',
-    logo: '/src/assets/icons/wechat-pay-logo.png',
-  },
-  {
-    id: 6,
-    name: '微信支付',
-    description: 'WeChat Pay',
-    logo: '/src/assets/icons/wechat-pay-logo.png',
-  },
+// const payMethods: PayMethod[] = [
+//   {
+//     id: 1,
+//     name: '支付宝',
+//     description: 'Alipay',
+//     logo: '/src/assets/icons/alipay-log.png',
+//   },
+//   {
+//     id: 2,
+//     name: '微信支付',
+//     description: 'WeChat Pay',
+//     logo: '/src/assets/icons/wechat-pay-logo.png',
+//   },
+//   {
+//     id: 3,
+//     name: '微信支付',
+//     description: 'WeChat Pay',
+//     logo: '/src/assets/icons/wechat-pay-logo.png',
+//   },
+//   {
+//     id: 4,
+//     name: '微信支付',
+//     description: 'WeChat Pay',
+//     logo: '/src/assets/icons/wechat-pay-logo.png',
+//   },
+//   {
+//     id: 5,
+//     name: '微信支付',
+//     description: 'WeChat Pay',
+//     logo: '/src/assets/icons/wechat-pay-logo.png',
+//   },
+//   {
+//     id: 6,
+//     name: '微信支付',
+//     description: 'WeChat Pay',
+//     logo: '/src/assets/icons/wechat-pay-logo.png',
+//   },
 
-]
-
-function selectMethod(id: number) {
-  selectedMethod.value = id
-}
+// ]
 </script>
 
 <template>
-  <div class="relative max-h-[90vh] overflow-hidden rounded-t-24 bg-[#f4f4f4] text-18">
-    <svg
-      class="absolute left-15 top-13 z-10 h-24 w-24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+  <div class="relative max-h-[90vh] overflow-hidden rounded-t-24 bg-[#fff] text-18">
+    <div
+      class="absolute right-20 top-13 z-10 f-c cursor-pointer border-2 border-[#757575] rounded-full border-solid"
       @click="handleClose"
     >
-      <circle
-        opacity="0.08"
-        cx="12"
-        cy="12"
-        r="12"
-        fill="#333"
+      <div
+        class="i-material-symbols:close h-30 w-30"
+        style="color:#757575;"
       />
-      <g
-        stroke="#666"
-        stroke-width="2"
-        stroke-linecap="round"
-      >
-        <path d="M6.977 12.04h10.5M9.375 8.25l-2.788 3.253a1 1 0 0 0 .033 1.339l2.755 2.908" />
-      </g>
-    </svg>
-    <svg
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      class="absolute right-15 top-13 z-10 h-24 w-24"
-      @click="handleClose"
-    >
-      <circle
-        opacity="0.08"
-        cx="12"
-        cy="12"
-        r="12"
-        fill="#333"
-      />
-      <g
-        stroke="#666"
-        stroke-width="2"
-        stroke-linecap="round"
-      ><path d="m8.691 15.531 7.071-7.07M8.691 8.469l7.071 7.07" /></g>
-    </svg>
-    <div class="relative h-45 w-full f-c bg-[#fff] px-15 text-18">
+    </div>
+
+    <div class="relative my-15 w-full f-c px-15 text-36">
       确认支付订单
     </div>
     <div class="max-h-[80vh] min-h-[50vh] overflow-auto bg-[#fff] px-15 pb-150 pt-10">
-      <div class="w-full flex rounded-10 bg-[#E0E0E0] p-10">
+      <div class="w-full flex b-s-gray rounded-10 bg-[#f8f8f8] p-10">
         <img
           src="@/assets/icons/Avatar.png"
           alt=""
@@ -147,15 +160,15 @@ function selectMethod(id: number) {
           </p>
         </div>
         <div
-          v-for="method in payMethods"
-          :key="method.id"
+          v-for="method in payMethodList"
+          :key="method.payType"
           class="payList mb-10 h-40 f-c cursor-pointer rounded-8"
-          :class="selectedMethod === method.id ? 'border border-solid border-[#ED6504] bg-[#fff8f8]' : 'b-s bg-[#fff]'"
-          @click="selectMethod(method.id)"
+          :class="selectedMethod === method ? 'border border-solid border-[#ED6504] bg-[#fff8f8]' : 'b-s bg-[#fff]'"
+          @click="selectMethod(method)"
         >
           <img
-            :src="method.logo"
-            :alt="method.description"
+            :src="method.icon"
+            :alt="method.name"
             class="max-h-30 max-w-[40%]"
           >
         </div>

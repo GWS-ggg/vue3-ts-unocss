@@ -123,7 +123,7 @@ const mjGiftValue: Record<string, Record<string, number>> = {
 }
 
 // 获取赠送点券
-export function getVoucherPoints(product: Product, currencyCode: string, rebate: number, appid: string, productCount: number) {
+export function getVoucherPoints(product: Product, currencyCode: string, rebate: number, appid: string, productCount: number = 1) {
   let beforeValue = ''
   let result = ''
   let priceValue = 0

@@ -40,10 +40,6 @@ const dialogVisible = ref<boolean>(false)
 function openDialog() {
   dialogVisible.value = true
 }
-function closeDialog() {
-  console.log('dialog close')
-  dialogVisible.value = false
-}
 // 支付pop开关
 const isVisblePopup = ref(false)
 function onShowPopup() {
@@ -684,7 +680,7 @@ function reduceProductCount() {
 </script>
 
 <template>
-  <div class="scrollbarWidth h-[100vh] w-[100vw] overflow-x-hidden overflow-y-auto bg-[#E0E0E0]">
+  <div class="scrollbarWidth h-[100vh] w-[100vw] overflow-x-hidden overflow-y-auto bg-[#f8f8f8]">
     <HeaderContainer />
     <BannerImage />
     <div
@@ -724,7 +720,7 @@ function reduceProductCount() {
           </div>
         </div>
         <div
-          class="mt-10 w-full rounded-10 bg-[#E0E0E0]"
+          class="mt-10 w-full rounded-10 bg-[#f8f8f8]"
           lg="w-auto mt-0"
         >
           <div v-show="isLogin">
@@ -786,7 +782,7 @@ function reduceProductCount() {
         </div>
       </div>
       <div class="mb-40 mt-20 rounded-20 bg-[#fff] text-20">
-        <div class="ml-10 pt-10 text-24">
+        <div class="ml-10 py-10 text-24">
           礼包选择
         </div>
         <div
@@ -818,7 +814,7 @@ function reduceProductCount() {
                   @click="showPayOrder(product)"
                 >
                   {{ getVoucherPoints(product, currencyCode, getRebateAmount(payLevel, levelMap),
-                                      baseInfo.appid, productCount).beforeValue
+                                      baseInfo.appid).beforeValue
                   }}
                 </div>
               </div>
@@ -844,9 +840,11 @@ function reduceProductCount() {
       :product-count="productCount"
       :currency-code="currencyCode"
       :pay-method-list="payMethodList"
+      :pay-level="payLevel"
+      :level-map="levelMap"
+      :base-info="baseInfo"
       @add-product-count="addProductCount"
       @reduce-product-count="reduceProductCount"
-      @on-close-dialog="closeDialog"
       @checkout="checkout"
       @change-pay-method="changePayMethod"
     />
@@ -857,12 +855,25 @@ function reduceProductCount() {
   >
     <GameLogin
       v-model:uid="uid"
-      @on-close-login="onCloseLogin"
       @on-click-login="handleUIDOk"
     />
   </m-dialog>
   <m-popup v-model="isVisblePopup">
-    <OrderPop @on-close-popup="onClosePopup" />
+    <OrderPop
+      :selected-product="activeProduct"
+      :user-info="userInfo"
+      :product-count="productCount"
+      :currency-code="currencyCode"
+      :pay-method-list="payMethodList"
+      :pay-level="payLevel"
+      :level-map="levelMap"
+      :base-info="baseInfo"
+      @on-close-popup="onClosePopup"
+      @add-product-count="addProductCount"
+      @reduce-product-count="reduceProductCount"
+      @checkout="checkout"
+      @change-pay-method="changePayMethod"
+    />
   </m-popup>
   <Paypal
     ref="payPalRef"

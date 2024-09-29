@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { PaymethodType, Product, UserInfo } from '@/types/index'
-import { getPriceStr } from '@/utils'
-
+import { getRebateAmount } from '../../index'
+import type { H5PayBaseInfo, PaymethodType, Product, UserInfo } from '@/types/index'
+import { getVoucherPoints } from '@/utils'
 // interface PayMethod {
 //   id: number
 //   name: string
@@ -14,6 +14,9 @@ interface Props {
   currencyCode: string
   userInfo?: UserInfo
   productCount: number
+  payLevel: number
+  levelMap: Record<string, number>
+  baseInfo: H5PayBaseInfo
 }
 const props = withDefaults(defineProps<Props>(), {
   selectedProduct: null,
@@ -44,14 +47,10 @@ function selectMethod(method: PaymethodType) {
   emit('changePayMethod', method)
 }
 
-function handleClose() {
-  emit('onCloseDialog')
-}
-
 const priceStr = computed(() => {
   if (!props.selectedProduct)
     return ''
-  return getPriceStr(props.selectedProduct, props.currencyCode)
+  return getVoucherPoints(props.selectedProduct, props.currencyCode, getRebateAmount(props.payLevel, props.levelMap), props.baseInfo.appid, props.productCount).beforeValue
 })
 
 function checkout() {
@@ -68,32 +67,13 @@ function reduceProductCount() {
 
 <template>
   <div class="scrollWidthNone max-h-[90vh] overflow-x-hidden overflow-y-auto text-20">
-    <svg
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      class="absolute right-15 top-13 z-10 h-24 w-24 cursor-pointer"
-      @click="handleClose"
-    >
-      <circle
-        opacity="0.08"
-        cx="12"
-        cy="12"
-        r="12"
-        fill="#333"
-      />
-      <g
-        stroke="#666"
-        stroke-width="2"
-        stroke-linecap="round"
-      ><path d="m8.691 15.531 7.071-7.07M8.691 8.469l7.071 7.07" /></g>
-    </svg>
-    <div class="relative h-45 w-full f-c bg-[#fff] px-15 text-18">
+    <div class="relative my-10 w-full f-c bg-[#fff] text-30">
       确认支付订单
     </div>
-    <div class="h-auto bg-[#fff] px-15 pb-15 pt-10">
-      <div class="flex items-center">
+    <div class="m-15 h-auto bg-[#fff]">
+      <div class="flex">
         <div class="leftPanel mr-10 min-w-300 w-387">
-          <div class="roleInfo flex rounded-10 bg-[#E0E0E0] py-6 pl-7 pr-10">
+          <div class="roleInfo flex b-s border-[#EEEEEE] rounded-10 border-solid bg-[#f8f8f8] py-6 pl-7 pr-10">
             <div class="flex items-center">
               <img
                 class="h-63 w-63 rounded-10"
@@ -108,11 +88,11 @@ function reduceProductCount() {
               </div>
             </div>
           </div>
-          <div class="orderInfo my-10 h-518 rounded-10 bg-[#E0E0E0] py-10">
+          <div class="orderInfo mt-10 h-528 b-s border-[#EEEEEE] rounded-10 border-solid bg-[#f8f8f8] py-10">
             <div class="mb-8 px-10 text-12 color-[#666666] leading-16">
               商品信息
             </div>
-            <div class="f-b px-10">
+            <div class="mx-10 f-b b-s border-[#EEEEEE] rounded-16 border-solid bg-[#fff] px-10">
               <div flex>
                 <img
                   class="h-63 w-63 rounded-12 bg-contain bg-no-repeat"
@@ -126,31 +106,28 @@ function reduceProductCount() {
               <div>
                 <div class="f-c">
                   <div
-                    class="h-24 w-24 f-c cursor-not-allowed border-2 rounded-full rounded-full border-solid color-[#cccccc]"
-                    :class="{ 'color-[#ED6504] cursor-pointer! ': productCount > 1 }"
+                    class="h-24 w-24 f-c cursor-not-allowed border-2 rounded-full border-solid color-[#cccccc]"
+                    :class="{ ' color-[#ED6504] cursor-pointer! ': productCount > 1 }"
                     @click="reduceProductCount"
                   >
-                    <div class="i-ic:baseline-minus h-20 w-20" />
+                    <div class="i-bx:left-arrow mr-2 h-14 w-14" />
                   </div>
                   <div class="mx-10">
                     {{ productCount }}
                   </div>
                   <div
-                    class="h-24 w-24 f-c cursor-pointer rounded-full bg-[#ED6504]"
+                    class="h-24 w-24 f-c cursor-pointer border-2 rounded-full border-solid color-[#ED6504]"
                     @click="addProductCount"
                   >
-                    <div
-                      class="i-ic:baseline-add h-20 w-20"
-                      style="color: #fff;"
-                    />
+                    <div class="i-bx:right-arrow ml-2 h-14 w-14" />
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="rightPanel min-w-300 w-326">
-          <div class="scrollWidthNone h-360 overflow-y-auto border border-[#eee] rounded-10 border-solid bg-[#E0E0E0]">
+        <div class="rightPanel w-326 flex flex-col">
+          <div class="scrollWidthNone h-360 overflow-y-auto border border-[#eee] rounded-10 border-solid bg-[#f8f8f8]">
             <div class="px-10 pb-15 pt-10">
               <div class="mb-10 flex items-center">
                 <p class="text-12 color-[#666666] font-normal">
@@ -172,7 +149,7 @@ function reduceProductCount() {
               </div>
             </div>
           </div>
-          <div class="mt-10 h-218 flex flex-col justify-between border border-[#eee] rounded-10 border-solid bg-[#E0E0E0] p-10">
+          <div class="mt-10 h-245 flex flex-col justify-between border border-[#eee] rounded-10 border-solid bg-[#f8f8f8] p-10">
             <div class="mt-15">
               <div class="mb-5 h-24 f-b text-14">
                 <span class="min-w-70 color-[#666666]">商品价格:</span>

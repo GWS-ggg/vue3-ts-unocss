@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import Dialog from '../dialog/index.vue'
 import type { H5PayBaseInfo, OrderReq, Product, UserInfo } from '@/types/index'
 import { myCardOrderApi } from '@/api'
 import { PAYPAL_PAY_TYPE } from '@/enum/const'
@@ -78,12 +77,37 @@ const STATUS_SUCCESS = 1
 const STATUS_ERROR = 0
 const STATUS_CANCEL = 3
 function renderBtn() {
-  loadScript(`https://www.paypal.com/sdk/js?client-id=${props.baseInfo.paypalClientId}&currency=${props.baseInfo.paypalCurrency}`, () => {
+  // 设置国际化语言
+  const localeLanguage = 'en_US' // 例如：中文简体
+
+  // en_US：英语（美国）
+  // zh_CN：中文（简体）
+  // zh_TW：中文（繁体）
+  // es_ES：西班牙语（西班牙）
+  // fr_FR：法语（法国）
+  // de_DE：德语（德国）
+  // ja_JP：日语（日本）
+  // ko_KR：韩语（韩国）
+
+  loadScript(`https://www.paypal.com/sdk/js?client-id=${props.baseInfo.paypalClientId}&currency=${props.baseInfo.paypalCurrency}&locale=${localeLanguage}`, () => {
+    // 定义按钮样式
+    const buttonStyle = {
+      layout: 'vertical', // 按钮布局：vertical, horizontal
+      color: 'gold', // 按钮颜色：gold, blue, silver, black
+      shape: 'rect', // 按钮形状：rect, pill
+      label: 'paypal', // 按钮标签：paypal, checkout, buynow, pay
+      height: 55, // 按钮高度（像素）
+    }
+    //   // 使用自定义图片
+    //   // custom: '@/assets/icons/99-logo.png',
+    // }
+
     const paypal = (window as any).paypal
     // paypal初始化
     paypal.Buttons({
       // 下单
       createOrder() {
+        console.log('2222')
         return createPaypalOrder()
       },
       // 付款
@@ -107,6 +131,10 @@ function renderBtn() {
           status: STATUS_ERROR,
         })
       },
+      // 添加样式选项
+      style: buttonStyle,
+      // 设置语言
+      locale: localeLanguage,
     }).render('#paypal-button-container')
   })
 }
@@ -122,7 +150,15 @@ defineExpose({
 </script>
 
 <template>
-  <Dialog
+  <m-dialog v-model="visible">
+    <div class="h-626 w-626 f-c">
+      <div
+        id="paypal-button-container"
+        class="w-480"
+      />
+    </div>
+  </m-dialog>
+  <!-- <Dialog
     v-model:visible="visible"
     title="Paypal"
   >
@@ -132,7 +168,7 @@ defineExpose({
         class="main"
       />
     </div>
-  </Dialog>
+  </Dialog> -->
 </template>
 
 <style lang="less" scoped>

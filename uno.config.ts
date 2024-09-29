@@ -32,6 +32,7 @@ export default defineConfig({
     'text-overflow': 'truncate',
     'wh-full': 'w-full h-full',
     'b-s': 'border border-solid border-[#f6f6f6]',
+    'b-s-gray': 'border border-solid border-[#EEEEEE] ',
   },
   rules: [],
   transformers: [transformerDirectives()],

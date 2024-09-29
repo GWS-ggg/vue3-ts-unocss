@@ -91,11 +91,11 @@ function handleClose() {
 
   .pop-main {
     position: relative;
-    z-index: 10000;
+    z-index: 100;
     padding: 66px 50px 50px;
     width: 626px;
     height: 626px;
-    background-color: #1c254c;
+    background-color: #fff;
 
     .pop-icon {
       display: flex;
@@ -123,7 +123,7 @@ function handleClose() {
     .pop-content {
       font-size: 30px;
       text-align: center;
-      color: #efefef;
+      color: #000;
       font-weight: bold;
       font-stretch: normal;
       letter-spacing: 0px;
@@ -142,7 +142,7 @@ function handleClose() {
       }
 
       .btn-default {
-        background-color: #687ca4;
+        background-color: #ED6504;
       }
 
       .btn+.btn {

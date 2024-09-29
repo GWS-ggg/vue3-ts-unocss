@@ -38,11 +38,11 @@ const props = defineProps({
     type: String,
   },
 })
-defineEmits(['update:modelValue'])
+const emits = defineEmits(['update:modelValue'])
 // const DURATION = '0.5s' // 关闭事件
-// function onClose() {
-//   emits('update:modelValue', false)
-// }
+function onClose() {
+  emits('update:modelValue', false)
+}
 // const loading = ref(false)
 // // 取消事件
 // function onCancel() {
@@ -105,12 +105,22 @@ watch(() => props.modelValue, (newValue) => {
     <transition name="up">
       <div
         v-if="modelValue"
-        class="fixed left-1/2 top-[50%] z-50 min-w-[256px] translate-x-[-50%] translate-y-[-50%] rounded bg-white p-1.5 dark:bg-zinc-800"
+        class="fixed left-1/2 top-[50%] z-50 min-w-[256px] translate-x-[-50%] translate-y-[-50%] rounded-20 bg-white p-1.5"
         :class="customeClass"
       >
         <!-- title标题 -->
         <div class="mb-1 text-sm text-zinc-800 font-bold dark:text-zinc-200">
           {{ title }}
+        </div>
+        <!-- 关闭按钮内容 -->
+        <div
+          class="absolute right-20 top-20 z-10 f-c cursor-pointer border-2 border-[#757575] rounded-full border-solid"
+          @click="onClose"
+        >
+          <div
+            class="i-material-symbols:close h-30 w-30"
+            style="color:#757575;"
+          />
         </div>
         <!-- content内容 -->
         <div class="text-zinc-700 dark:text-zinc-300">

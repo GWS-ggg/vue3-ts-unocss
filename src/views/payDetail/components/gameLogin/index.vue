@@ -38,9 +38,6 @@ function handleBlur() {
     showDropdown.value = false
   }, 200)
 }
-function handleClose() {
-  emit('onCloseLogin')
-}
 
 function handleConfirm() {
   // 校验 不能为空
@@ -115,17 +112,6 @@ defineExpose({ saveUIDRecord })
     class="m-auto w-694 rounded-20 text-24"
     lg="w-700 text-24"
   >
-    <div
-      class="absolute right-15 top-13 z-10 cursor-pointer rounded-full bg-[#f1f1f1]"
-      lg="top-20 right-25"
-      @click="handleClose"
-    >
-      <div
-        class="i-material-symbols:close h-32 w-32"
-        lg="h-40 w-40"
-        style="color:#757575;"
-      />
-    </div>
     <div class="flex flex-col">
       <div
         class="mt-50 f-c"
@@ -158,20 +144,20 @@ defineExpose({ saveUIDRecord })
         />
         <div
           v-if="showDropdown"
-          class="shadow-[0 [rgba(0,0,0,0.1)]] absolute left-60 top-55 w-578 border border-[#ccc] border-solid border-t-none bg-[#fff]"
+          class="shadow-[0 [rgba(0,0,0,0.1)]] absolute left-60 top-55 w-578 border-t-none bg-[#fff]"
           :class="{ 'border border-[#ccc] border-solid border-t-none': uidRecordList.length > 0 }"
           lg="w-584 left-60 text- top-65 "
         >
           <div
             v-for="(uidRecord, index) in uidRecordList"
             :key="index"
-            class="f-b p-8 hover:bg-[#ED6504]"
+            class="f-b p-8 hover:bg-[#fff5e6]"
             @click="selectUIDRecord(uidRecord.uid)"
           >
             <span>{{ uidRecord.uid }} ({{ uidRecord.userName }}) </span>
             <div @click.stop="removeUIDRecord(uidRecord.uid)">
               <div
-                class="i-iwwa:delete h-26 w-26"
+                class="i-iwwa:delete h-26 w-26 cursor-pointer"
                 style="color: #ED6504;"
               />
             </div>

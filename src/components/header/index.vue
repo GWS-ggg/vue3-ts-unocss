@@ -95,6 +95,18 @@ const router = useRouter()
 function navigationToHome() {
   router.push('/gameHome')
 }
+
+// 进入游戏充值页面后 导航栏显示游戏充值
+const gameDetailVisible = ref(false)
+const route = useRoute()
+watchEffect(() => {
+  if (route.path === '/payDetail') {
+    gameDetailVisible.value = true
+  }
+  else {
+    gameDetailVisible.value = false
+  }
+})
 </script>
 
 <template>
@@ -110,13 +122,15 @@ function navigationToHome() {
       >
         <!-- <div v-if="!isMenuVisible" class="i-ooui:menu h-24 w-24" style="color: white;" />
         <div v-else class="i-material-symbols:close h-24 w-24" style="color: white;" /> -->
-        <div class="relative h-45 w-72">
+        <div class="relative h-28 w-40">
           <img
+            v-show="!isMenuVisible"
             class="absolute left-0 h-full w-full"
             src="@/assets/icons/List.png"
             alt=""
           >
           <img
+            v-show="isMenuVisible"
             class="absolute left-0 h-full w-full"
             src="@/assets/icons/Back.png"
             alt=""
@@ -168,11 +182,11 @@ function navigationToHome() {
         class="mobileLanguage flex cursor-pointer items-center"
         @click="changeLanguageVisible"
       >
-        <div class="relative mr-15 whitespace-nowrap text-30 color-[#FFFFFF]">
+        <div class="relative mr-15 whitespace-nowrap text-24 color-[#FFFFFF]">
           {{ selectedLanguageLabel }}
           <div
             v-show="isLanguageVisible"
-            class="absolute top-30 w-100 f-c flex-col bg-[#222C37] pb-20 text-30 color-[#fff] -left-20"
+            class="absolute top-30 w-100 f-c flex-col bg-[#222C37] pb-20 text-24 color-[#fff] -left-20"
           >
             <div
               v-for="language in languageOptions"
@@ -185,12 +199,15 @@ function navigationToHome() {
             </div>
           </div>
         </div>
-        <img
+        <div
           v-if="!isPCDevice"
-          src="@/assets/icons/dropDownArrow.png"
-          class="h-30 w-30"
-          alt=""
+          class="h-24 w-24 f-c border-2 border-[#fff] rounded-full border-solid -ml-10"
         >
+          <div
+            class="i-fe:arrow-down h-24 w-24"
+            style="color: white;"
+          />
+        </div>
         <img
           v-else
           src="@/assets/icons/global-icon.png"
